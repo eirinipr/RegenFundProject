@@ -1,6 +1,6 @@
 using System;
 
-namespace FundProjectMVC.Models
+namespace FundProjectsMvc.Models
 {
     public class ErrorViewModel
     {

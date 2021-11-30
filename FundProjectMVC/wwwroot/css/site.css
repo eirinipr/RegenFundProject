@@ -69,3 +69,49 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.btncreator {
+    background-color: darkblue;
+    color: white;
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+.btnbacker {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: darkblue;
+    color: white;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+.signin {
+    text-align: center;
+}
+
+.login {
+    background-color: darkblue;
+    color: white;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+.createcreator .createbacker {
+    background-color:aliceblue;
+}
+
+.signupbox {
+    width: 300px;
+    height: 360px;
+    border: 2px solid black;
+    padding: 40px;
+    position: absolute;
+    left: 40%;
+    bottom: 260px;
+}
+

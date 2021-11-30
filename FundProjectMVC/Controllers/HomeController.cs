@@ -1,4 +1,4 @@
-﻿using FundProjectMVC.Models;
+﻿using FundProjectsMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjectMVC.Controllers
+namespace FundProjectsMvc.Controllers
 {
     public class HomeController : Controller
     {
@@ -23,7 +23,7 @@ namespace FundProjectMVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }
