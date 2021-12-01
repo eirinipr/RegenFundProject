@@ -21,12 +21,19 @@ namespace FundProjectAPI.Service
             {
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
+                Email = dto.Email
             };
 
             _fundContext.Backers.Add(backer);
             await _fundContext.SaveChangesAsync();
 
-            return backer.Convert();
+            return new BackerDto()
+            {
+                Id = backer.Id,
+                FirstName = backer.FirstName,
+                LastName = backer.LastName,
+                Email = backer.Email
+            };
         }
 
         public async Task<bool> Delete(int id)

@@ -10,7 +10,7 @@ function createCreator() {
 
 function createBacker() {
 
-    letAPI = 'https://localhost:44317/api/Backer';
+    let urlAPI = 'https://localhost:44317/api/Backer';
     let method = 'POST';
     let data = JSON.stringify({
         FirstName: $('#FirstName').val(),
@@ -28,7 +28,6 @@ function createBacker() {
             data: data
 
         })
-        .done(result => alert("Account created successfully with id:" + backer.Id))
+        .done(result => alert(JSON.stringify(result)))
         .fail(failure => alert("Something went wrong. Try again later."));
-}
 }
