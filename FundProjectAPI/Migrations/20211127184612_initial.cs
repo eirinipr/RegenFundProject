@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FundProjects.Migrations
+namespace FundProjectAPI.Migrations
 {
     public partial class initial : Migration
     {

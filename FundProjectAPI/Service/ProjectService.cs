@@ -1,6 +1,6 @@
-﻿using FundProjects.Data;
-using FundProjects.DTOs;
-using FundProjects.Model;
+﻿using FundProjectAPI.Data;
+using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Service
+namespace FundProjectAPI.Service
 {
     public class ProjectService : IProjectService
     {

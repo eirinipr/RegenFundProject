@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FundProjects.Service
+namespace FundProjectAPI.Service
 {
     public class NotFoundException : Exception
     {

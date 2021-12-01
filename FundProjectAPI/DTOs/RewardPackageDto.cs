@@ -1,4 +1,4 @@
-﻿namespace FundProjects.DTOs
+﻿namespace FundProjectAPI.DTOs
 {
     public class RewardPackageDto
     {

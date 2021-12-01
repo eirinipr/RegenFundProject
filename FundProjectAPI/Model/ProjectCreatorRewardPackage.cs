@@ -1,4 +1,4 @@
-﻿namespace FundProjects.Model
+﻿namespace FundProjectAPI.Model
 {
     public class ProjectCreatorRewardPackage
     {

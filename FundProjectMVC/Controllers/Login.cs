@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjectsMvc.Controllers
+namespace FundProjectsMVC.Controllers
 {
     public class Login : Controller
     {

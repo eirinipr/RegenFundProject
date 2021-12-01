@@ -1,4 +1,4 @@
-﻿using FundProjectsMvc.Models;
+﻿using FundProjectsMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjectsMvc.Controllers
+namespace FundProjectsMVC.Controllers
 {
     public class HomeController : Controller
     {

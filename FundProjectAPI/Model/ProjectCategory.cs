@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Model
+namespace FundProjectAPI.Model
 {
     public enum ProjectCategory
     {

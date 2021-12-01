@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.DTOs
+namespace FundProjectAPI.DTOs
 {
     public class ProjectCreatorDto
     {

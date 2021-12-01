@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FundProjects.Model
+namespace FundProjectAPI.Model
 {
     public class RewardPackage
     {

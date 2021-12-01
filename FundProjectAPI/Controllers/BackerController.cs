@@ -1,5 +1,5 @@
-﻿using FundProjects.DTOs;
-using FundProjects.Service;
+﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Controllers
+namespace FundProjectAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

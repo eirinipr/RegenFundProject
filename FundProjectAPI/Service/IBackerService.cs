@@ -1,8 +1,8 @@
-﻿using FundProjects.DTOs;
+﻿using FundProjectAPI.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FundProjects.Service
+namespace FundProjectAPI.Service
 {
     public interface IBackerService
     {

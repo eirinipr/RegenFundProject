@@ -1,10 +1,10 @@
-﻿using FundProjects.DTOs;
+﻿using FundProjectAPI.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Service
+namespace FundProjectAPI.Service
 {
     public interface IProjectCreatorService
     {

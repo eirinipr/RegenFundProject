@@ -1,11 +1,11 @@
-﻿using FundProjects.DTOs;
+﻿using FundProjectAPI.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Model
+namespace FundProjectAPI.Model
 {
     public class Backer
     {

@@ -1,11 +1,11 @@
-﻿using FundProjects.Model;
+﻿using FundProjectAPI.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FundProjects.Data
+namespace FundProjectAPI.Data
 {
     public class FundContext : DbContext
     {
