@@ -1,4 +1,5 @@
-﻿using FundProjectAPI.Model;
+﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace FundProjectAPI.DTOs
         public int ProjectCreatorId { get; set; }
         public decimal Goal { get; set; }
         public decimal GoalGained { get; set; }
+        public List<RewardPackageDto> RewardPackageDtos { get; set; }
+
     }
 }

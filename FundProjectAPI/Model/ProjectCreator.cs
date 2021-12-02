@@ -1,7 +1,7 @@
-﻿using FundProjectAPI.DTOs;
-using System;
+﻿using FundProjectAPI.Model;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,14 +9,13 @@ namespace FundProjectAPI.Model
 {
     public class ProjectCreator
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
-        public List<Project> Projects { get; set; }
-        public List<RewardPackage> RewardsPackages { get; set; } = new();
-
+        public string PhoneNumber { get; set; }
+        public List<Project> Projects { get; set; } = new();
     }
 }

@@ -24,7 +24,6 @@ namespace FundProjectAPI.Service
         {
             var projectCreator = new ProjectCreator()
             {
-                Id = dto.Id,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
@@ -32,44 +31,6 @@ namespace FundProjectAPI.Service
             };
             _fundContext.ProjectCreators.Add(projectCreator);
 
-            foreach (var rewardPackageDto in dto.RewardpackagesDtos)
-            {
-                var rewardPackage = new RewardPackage()
-                {
-                    FundAmount = rewardPackageDto.FundAmount,
-                    Reward = rewardPackageDto.Reward
-                };
-
-                _fundContext.RewardPackage.Add(rewardPackage);
-                _fundContext.ProjectCreatorRewardPackages.Add(
-                    new ProjectCreatorRewardPackage
-                    {
-                        ProjectCreator = projectCreator,
-                        RewardPackage = rewardPackage
-                    }
-                ); ;
-
-            }
-            await _fundContext.SaveChangesAsync();
-
-            return projectCreator.Convert();
-        }
-
-        public async Task<ProjectCreatorDto> AddProjectCreatorWithRewardsPackages(ProjectCreatorDto dto)
-        {
-            var projectCreatorRewardPackages = _fundContext.ProjectCreatorRewardPackages.Find();
-
-
-            var projectCreator = new ProjectCreator()
-            {
-                Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                PhoneNumber = dto.PhoneNumber
-            };
-
-            _fundContext.ProjectCreators.Add(projectCreator);
             await _fundContext.SaveChangesAsync();
 
             return projectCreator.Convert();
@@ -91,13 +52,16 @@ namespace FundProjectAPI.Service
 
         public async Task<ProjectCreatorDto> Update(int projectCreatorId, ProjectCreatorDto dto)
         {
+            if (dto is null)
+                throw new ArgumentException("Data format problem");
             ProjectCreator projectCreator = await _fundContext.ProjectCreators
               .SingleOrDefaultAsync(pc => pc.Id == projectCreatorId);
 
             if (projectCreator is null) throw new NotFoundException("The project Creator id is invalid or has been removed.");
-            if (dto.FirstName is null || dto.LastName is null || dto.Email is null) {
-                throw new ArgumentException("Project creator must have first name,last name and email.");
 
+            if (dto.FirstName is null || dto.LastName is null || dto.Email is null)
+            {
+                throw new ArgumentException("Project creator must have first name,last name and email.");
             }
 
             projectCreator.FirstName = dto.FirstName;
@@ -131,6 +95,30 @@ namespace FundProjectAPI.Service
 
             await _fundContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<ProjectDto> AddProjectToProjectCreator(int projectCreatorId, ProjectDto dto)
+        {
+            if (dto is null)
+                throw new ArgumentException("Data format problem");
+            ProjectCreator projectCreator = await _fundContext.ProjectCreators
+                .SingleOrDefaultAsync(pc => pc.Id == projectCreatorId);
+
+            if (projectCreator is null)
+                throw new NotFoundException("The project creator id is invalid or the project creator has been removed.");
+            if (dto.Title is null || dto.Description is null)
+                throw new ArgumentException("Project creator must have first name,last name and email.");
+
+            Project project = dto.Convert();
+            foreach (var rewardPackageDto in dto.RewardPackageDtos)
+            {
+                project.RewardPackages.Add(rewardPackageDto.Convert());
+            }
+            projectCreator.Projects.Add(project);
+
+            await _fundContext.SaveChangesAsync();
+
+            return dto;
         }
     }
 }

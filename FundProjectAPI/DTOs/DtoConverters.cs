@@ -1,4 +1,5 @@
-﻿using FundProjectAPI.Model;
+﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace FundProjectAPI.DTOs
     {
         public static ProjectCreatorDto Convert(this ProjectCreator projectCreator)
         {
+            if (projectCreator is null) return null;
+
             return new ProjectCreatorDto()
             {
                 Id = projectCreator.Id,
@@ -22,6 +25,8 @@ namespace FundProjectAPI.DTOs
 
         public static ProjectCreator Convert(this ProjectCreatorDto projectCreatorDto)
         {
+            if (projectCreatorDto is null) return null;
+
             return new ProjectCreator()
             {
                 Id = projectCreatorDto.Id,
@@ -32,9 +37,50 @@ namespace FundProjectAPI.DTOs
             };
         }
 
+        public static ProjectDto Convert(this Project project)
+        {
+            if (project is null) return null;
+
+            return new ProjectDto()
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Description = project.Description,
+                Goal = project.Goal,
+                Category = project.Category,
+                GoalGained = project.GoalGained
+            };
+        }
+
+        public static Project Convert(this ProjectDto projectDto)
+        {
+            if (projectDto is null) return null;
+
+            return new Project()
+            {
+                Title = projectDto.Title,
+                Description = projectDto.Description,
+                Goal = projectDto.Goal,
+                Category = projectDto.Category,
+                GoalGained = projectDto.GoalGained
+            };
+        }
+
+        public static RewardPackage Convert(this RewardPackageDto rewardPackageDto)
+        {
+            if (rewardPackageDto is null) return null;
+
+            return new RewardPackage()
+            {
+                FundAmount = rewardPackageDto.FundAmount,
+                Reward = rewardPackageDto.Reward
+            };
+        }
 
         public static BackerDto Convert(this Backer backer)
         {
+            if (backer is null) return null;
+
             return new BackerDto()
             {
                 Id = backer.Id,

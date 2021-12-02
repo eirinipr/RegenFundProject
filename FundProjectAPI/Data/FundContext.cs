@@ -13,7 +13,6 @@ namespace FundProjectAPI.Data
         public DbSet<Backer> Backers { get; set; }
         public DbSet<ProjectCreator> ProjectCreators { get; set; }
         public DbSet<BackerProject> BackerProjects { get; set; }
-        public DbSet<ProjectCreatorRewardPackage> ProjectCreatorRewardPackages { get; set; }
         public DbSet<RewardPackage> RewardPackage { get; set; }
         public FundContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
@@ -28,8 +27,6 @@ namespace FundProjectAPI.Data
             modelBuilder.Entity<Backer>().ToTable("Backer");
             modelBuilder.Entity<ProjectCreator>().ToTable("ProjectCreator");
             modelBuilder.Entity<BackerProject>().ToTable("BackerProject");
-            modelBuilder.Entity<ProjectCreatorRewardPackage>().ToTable("ProjectCreatorRewardPackage");
-
         }
     }
 }
