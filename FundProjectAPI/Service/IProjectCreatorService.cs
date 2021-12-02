@@ -14,6 +14,7 @@ namespace FundProjectAPI.Service
         public Task<ProjectCreatorDto> Update(int projectCreatorId, ProjectCreatorDto dto);
         public Task<ProjectCreatorDto> Replace(int projectCreatorId, ProjectCreatorDto dto);
         public Task<bool> Delete(int projectCreatorId);
+        public Task<ProjectDto> AddProjectToProjectCreator(int projectCreatorId, ProjectDto dto);
 
     }
 }
