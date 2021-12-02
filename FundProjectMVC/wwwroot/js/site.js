@@ -3,10 +3,6 @@
 
 // Write your JavaScript code.
 
-function createCreator() {
-    let urlAPI = ''
-
-}
 
 function createBacker() {
 
@@ -33,8 +29,8 @@ function createBacker() {
 }
 
 function getBacker() {
-    let urlAPI = 'https://localhost:44317/api/Backer/{id}'
-    let method = 'GET'
+    let urlAPI = 'https://localhost:44317/api/Backer/{id}';
+    let method = 'GET';
     let data = JSON.stringify({
         Id: $('Id').val()
     });
@@ -52,4 +48,32 @@ function getBacker() {
             })
         .fail(failure => alert("Id not found. Create an account below."));
     
+}
+
+
+$(document).ready(function () {
+    if ($("#Results").length != 0) {
+        getallProjects()
+    }
+});
+
+function getallProjects() {
+    let urlAPI = "https://localhost:44317/api/Project";
+    let method = 'GET';
+
+    $.ajax({
+        url: urlAPI,
+        method: method
+    })
+        .done(result => {
+            let resultData = "<table class='table'>";
+            result.forEach(project => resultData += ('<tr><td>' + project.Id + '</td><td>' + project.Title + '</td></tr>'));
+
+            resultData += '</table' >;
+            $("#Results").html(resultData);
+        })
+        .fail(failure => {
+            alert("Something went wrong.");
+        });
+
 }

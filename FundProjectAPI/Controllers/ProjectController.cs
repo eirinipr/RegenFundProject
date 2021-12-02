@@ -108,5 +108,12 @@ namespace FundProjectAPI.Controllers
         {
             return await _service.Delete(id);
         }
+
+
+        [HttpGet]
+        public async Task<List<ProjectDto>> GetAllProjects()
+        {
+            return await _service.GetAllProjects();
+        }
     }
 }
