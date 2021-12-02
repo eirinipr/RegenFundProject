@@ -112,33 +112,26 @@ namespace FundProjectAPI.Service
             return backer.Convert();
         }
 
-        public async Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto, RewardPackageDto rewarddto)
+       
+        public async Task<BackerDto> AddBacker2Project(int projectId, BackerDto dto)
         {
-            if (dto is null || rewarddto is null)
+            if (dto is null)
                 throw new ArgumentException("Data format problem");
-            Backer backer = await _fundContext.Backers
-                .SingleOrDefaultAsync(b => b.Id == backerId);
-            if (backer is null)
-                throw new NotFoundException("The backer id is invalid, or backer has been removed");
-            if (dto.Title is null || dto.Description is null)
-                throw new ArgumentException("Project must have Title and description");
+            Project project = await _fundContext.Projects
+                .SingleOrDefaultAsync(p => p.Id == projectId);
+            if (project is null)
+                throw new NotFoundException("The project id is invalid, or project has been removed");
+            if (dto.FirstName is null || dto.LastName is null)
+                throw new ArgumentException("Backer must have FirstName and LastName");
 
-            Project project = dto.Convert();
-            RewardPackage reward = rewarddto.Convert();
-            
-
-            project.FundRewardPackages.Add(reward);
-
-
-            backer.Projects.Add(project);
-
+            Backer backer = dto.Convert();
+            project.Backers.Add(backer);
 
             await _fundContext.SaveChangesAsync();
-            return dto;
+            return backer.Convert();
 
 
         }
-
 
     }
 }
