@@ -2,6 +2,7 @@
 using FundProjectAPI.DTOs;
 using FundProjectAPI.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -110,5 +111,34 @@ namespace FundProjectAPI.Service
 
             return backer.Convert();
         }
+
+        public async Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto, RewardPackageDto rewarddto)
+        {
+            if (dto is null || rewarddto is null)
+                throw new ArgumentException("Data format problem");
+            Backer backer = await _fundContext.Backers
+                .SingleOrDefaultAsync(b => b.Id == backerId);
+            if (backer is null)
+                throw new NotFoundException("The backer id is invalid, or backer has been removed");
+            if (dto.Title is null || dto.Description is null)
+                throw new ArgumentException("Project must have Title and description");
+
+            Project project = dto.Convert();
+            RewardPackage reward = rewarddto.Convert();
+            
+
+            project.FundRewardPackages.Add(reward);
+
+
+            backer.Projects.Add(project);
+
+
+            await _fundContext.SaveChangesAsync();
+            return dto;
+
+
+        }
+
+
     }
 }
