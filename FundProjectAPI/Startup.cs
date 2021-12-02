@@ -51,6 +51,7 @@ namespace FundProjectAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FundProjectAPI v1"));
+
             }
 
             app.UseHttpsRedirection();

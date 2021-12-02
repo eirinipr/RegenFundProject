@@ -29,6 +29,7 @@ namespace FundProjectAPI.Data
             modelBuilder.Entity<ProjectCreator>().ToTable("ProjectCreator");
             modelBuilder.Entity<BackerProject>().ToTable("BackerProject");
             modelBuilder.Entity<ProjectCreatorRewardPackage>().ToTable("ProjectCreatorRewardPackage");
+            modelBuilder.Entity<RewardPackage>().ToTable("RewardPackage");
 
         }
     }

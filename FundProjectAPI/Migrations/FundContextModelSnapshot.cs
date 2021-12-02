@@ -19,7 +19,7 @@ namespace FundProjectAPI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FundProjects.Model.Backer", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.Backer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace FundProjectAPI.Migrations
                     b.ToTable("Backer");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.BackerProject", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.BackerProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,30 +66,7 @@ namespace FundProjectAPI.Migrations
                     b.ToTable("BackerProject");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.FundPackage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("PackagePrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reward")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("FundPackage");
-                });
-
-            modelBuilder.Entity("FundProjects.Model.Project", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +98,7 @@ namespace FundProjectAPI.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.ProjectCreator", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,13 +123,63 @@ namespace FundProjectAPI.Migrations
                     b.ToTable("ProjectCreator");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.BackerProject", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreatorRewardPackage", b =>
                 {
-                    b.HasOne("FundProjects.Model.Backer", "Backer")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ProjectCreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RewardPackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectCreatorId");
+
+                    b.HasIndex("RewardPackageId");
+
+                    b.ToTable("ProjectCreatorRewardPackage");
+                });
+
+            modelBuilder.Entity("FundProjectAPI.Model.RewardPackage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("FundAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ProjectCreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectCreatorId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("RewardPackage");
+                });
+
+            modelBuilder.Entity("FundProjectAPI.Model.BackerProject", b =>
+                {
+                    b.HasOne("FundProjectAPI.Model.Backer", "Backer")
                         .WithMany("BackerProjects")
                         .HasForeignKey("BackerId");
 
-                    b.HasOne("FundProjects.Model.Project", "Project")
+                    b.HasOne("FundProjectAPI.Model.Project", "Project")
                         .WithMany("BackerProjects")
                         .HasForeignKey("ProjectId");
 
@@ -161,37 +188,58 @@ namespace FundProjectAPI.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.FundPackage", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
-                    b.HasOne("FundProjects.Model.Project", null)
-                        .WithMany("FundPackages")
-                        .HasForeignKey("ProjectId");
-                });
-
-            modelBuilder.Entity("FundProjects.Model.Project", b =>
-                {
-                    b.HasOne("FundProjects.Model.ProjectCreator", null)
+                    b.HasOne("FundProjectAPI.Model.ProjectCreator", null)
                         .WithMany("Projects")
                         .HasForeignKey("ProjectCreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FundProjects.Model.Backer", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreatorRewardPackage", b =>
+                {
+                    b.HasOne("FundProjectAPI.Model.ProjectCreator", "ProjectCreator")
+                        .WithMany()
+                        .HasForeignKey("ProjectCreatorId");
+
+                    b.HasOne("FundProjectAPI.Model.RewardPackage", "RewardPackage")
+                        .WithMany()
+                        .HasForeignKey("RewardPackageId");
+
+                    b.Navigation("ProjectCreator");
+
+                    b.Navigation("RewardPackage");
+                });
+
+            modelBuilder.Entity("FundProjectAPI.Model.RewardPackage", b =>
+                {
+                    b.HasOne("FundProjectAPI.Model.ProjectCreator", null)
+                        .WithMany("RewardsPackages")
+                        .HasForeignKey("ProjectCreatorId");
+
+                    b.HasOne("FundProjectAPI.Model.Project", null)
+                        .WithMany("FundRewardPackages")
+                        .HasForeignKey("ProjectId");
+                });
+
+            modelBuilder.Entity("FundProjectAPI.Model.Backer", b =>
                 {
                     b.Navigation("BackerProjects");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.Project", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
                     b.Navigation("BackerProjects");
 
-                    b.Navigation("FundPackages");
+                    b.Navigation("FundRewardPackages");
                 });
 
-            modelBuilder.Entity("FundProjects.Model.ProjectCreator", b =>
+            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreator", b =>
                 {
                     b.Navigation("Projects");
+
+                    b.Navigation("RewardsPackages");
                 });
 #pragma warning restore 612, 618
         }
