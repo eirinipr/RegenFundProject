@@ -31,3 +31,25 @@ function createBacker() {
         .done(result => alert(JSON.stringify(result)))
         .fail(failure => alert("Something went wrong. Try again later."));
 }
+
+function getBacker() {
+    let urlAPI = 'https://localhost:44317/api/Backer/{id}'
+    let method = 'GET'
+    let data = JSON.stringify({
+        Id: $('Id').val()
+    });
+
+    let contentType = 'application/json';
+
+    $.ajax({
+        url: urlAPI,
+        method: method,
+        contentType: contentType,
+        data: data
+    })
+        .done(result => function (data) {
+            window.location = 'Backer/Index.html';
+            })
+        .fail(failure => alert("Id not found. Create an account below."));
+    
+}
