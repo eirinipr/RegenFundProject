@@ -88,5 +88,66 @@ namespace FundProjectAPI.DTOs
                 LastName = backer.LastName
             };
         }
+
+        public static Backer Convert(this BackerDto dto)
+        {
+            return new Backer()
+            {
+                Id = dto.Id,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName
+            };
+        }
+
+        public static ProjectDto Convert(this Project project)
+        {
+            return new ProjectDto()
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Description = project.Description,
+                Category = project.Category,
+                ProjectCreatorId = project.ProjectCreatorId
+            };
+
+        }
+
+        public static Project Convert(this ProjectDto projectdto)
+        {
+            return new Project()
+            {
+                Id = projectdto.Id,
+                Title = projectdto.Title,
+                Description = projectdto.Description,
+                Category = projectdto.Category,
+                ProjectCreatorId = projectdto.ProjectCreatorId
+            };
+        }
+
+        public static RewardPackage Convert(this RewardPackageDto dto)
+        {
+            return new RewardPackage()
+            {
+                FundAmount = dto.FundAmount,
+                Reward = dto.Reward
+
+            };
+
+        }
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
 }

@@ -108,5 +108,14 @@ namespace FundProjectAPI.Controllers
         {
             return await _service.Delete(id);
         }
+
+
+        
+
+        [HttpPost, Route("{backerId}")]
+        public async Task<ActionResult<ProjectDto>> AddProject2Backer(int backerId, ProjectDto dto)
+        {
+            return await _service.AddProject2Backer(backerId, dto);
+        }
     }
 }
