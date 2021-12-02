@@ -14,7 +14,7 @@ namespace FundProjectAPI.Model
         public int ProjectCreatorId { get; set; }
         public decimal Goal { get; set; }
         public decimal GoalGained { get; set; }
-        public List<BackerProject> BackerProjects { get; set; }
+        public List<Backer> Backers { get; set; } = new();
         public List<RewardPackage> FundRewardPackages { get; set; }
     }
 }
