@@ -2,9 +2,11 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-family: 'Times New Roman', Times, serif;
+    color: #033B4F;
 }
 
 /* Provide sufficient contrast against white background */
@@ -24,10 +26,27 @@ a {
   border-color: #1861ac;
 }
 
+.nav-link text-dark {
+    font-family: 'Times New Roman';
+    font-size: 50px;
+}
+
+.welcome {
+    color: #1D7486;
+    font-family: 'Times New Roman';
+    font-size: 65px;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /*hides the slide bar vertically-horizontally*/
+    overflow-y: hidden;
 }
 @media (min-width: 768px) {
   html {
@@ -59,19 +78,19 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 30px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 30px; /* Vertically center the text there */
 }
 
 .btncreator {
-    background-color: darkblue;
+    background-color: #1A6675;
     color: white;
     position: absolute;
     top: 15px;
@@ -84,7 +103,7 @@ body {
     position: absolute;
     top: 15px;
     right: 20px;
-    background-color: darkblue;
+    background-color: #1A6675;
     color: white;
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
     border-radius: 5px;
@@ -95,20 +114,31 @@ body {
 }
 
 .login {
-    background-color: darkblue;
+    background-color: #1F7A8C;
     color: white;
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
     border-radius: 5px;
 }
 
-.createcreator .createbacker {
-    background-color:aliceblue;
+.createcreator {
+    background-color: #F1F3F9 !important;
+}
+
+.createbacker {
+    background-color: #F1F3F9 !important;
+}
+
+.create {
+    background-color: #1F7A8C;
+    color: white;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
 }
 
 .signupbox {
     width: 300px;
     height: 360px;
-    border: 2px solid black;
+    border: 5px solid #022B3A;
     padding: 40px;
     position: absolute;
     left: 40%;
@@ -200,7 +230,7 @@ body {
     .wrapper .sidebar {
         width: 209px;
         height: 100%;
-        background: darkblue;
+        background: #1D7486;
         padding: 30px 0px;
         position: fixed;
     }
@@ -221,7 +251,7 @@ body {
         }
 
             .wrapper .sidebar ul li a {
-                color: #bdb8d7;
+                color: #BFDBF7;
                 display: block;
             }
 
@@ -230,7 +260,7 @@ body {
                 }
 
             .wrapper .sidebar ul li:hover {
-                background-color: cornflowerblue;
+                background-color: #47BFD7;
             }
 
                 .wrapper .sidebar ul li:hover a {

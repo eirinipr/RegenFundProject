@@ -64,16 +64,39 @@ function getallProjects() {
     $.ajax({
         url: urlAPI,
         method: method
-    })
+        })
         .done(result => {
             let resultData = "<table class='table'>";
             result.forEach(project => resultData += ('<tr><td>' + project.Id + '</td><td>' + project.Title + '</td></tr>'));
 
-            resultData += '</table' >;
+            resultData += '</table'>
             $("#Results").html(resultData);
         })
         .fail(failure => {
             alert("Something went wrong.");
         });
+
+}
+
+
+function getCreator() {
+    let urlAPI = 'https://localhost:44317/api/ProjectCreator/{id}';
+    let method = 'GET';
+    let data = JSON.stringify({
+        Id: $('Id').val()
+    });
+
+    let contentType = 'application/json';
+
+    $.ajax({
+        url: urlAPI,
+        method: method,
+        contentType: contentType,
+        data: data
+    })
+        .done(result => function (data) {
+            window.location = 'Creator/Index.html';
+        })
+        .fail(failure => alert("Id not found. Create an account below."));
 
 }
