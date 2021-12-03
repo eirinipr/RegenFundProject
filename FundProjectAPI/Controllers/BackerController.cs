@@ -13,10 +13,12 @@ namespace FundProjectAPI.Controllers
     [ApiController]
     public class BackerController : ControllerBase
     {
-        private IBackerService _service;
-        public BackerController(IBackerService service) 
+        private readonly IBackerService _service;
+        
+        public BackerController(IBackerService service, IProjectService proservice) 
         {
             _service = service;
+            
         }
 
         [HttpGet]
@@ -84,9 +86,16 @@ namespace FundProjectAPI.Controllers
         }
 
         [HttpPost, Route("{projectId}")]
-        public async Task<ActionResult<BackerDto>> AddBacker2Project(int projectId, BackerDto dto)
+        public async Task<ActionResult<ProjectDto>> AddBacker2Project(int backerId, ProjectDto dto, int goalgained)
         {
-            return await _service.AddBacker2Project(projectId, dto);
+            return await _service.AddBacker2Project(backerId, dto, goalgained);
+
+        }
+
+        [HttpGet, Route("{Email}")]
+        public async Task<ActionResult<BackerDto>> GetBackerByEmail(string email)
+        {
+            return await _service.GetBackerByEmail(email);
         }
 
     }

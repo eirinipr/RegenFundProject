@@ -13,6 +13,7 @@ namespace FundProjectAPI.Service
         public Task<BackerDto> Update(int backerId, BackerDto dto);
         public Task<BackerDto> Replace(int backerId, BackerDto dto);
         public Task<bool> Delete(int backerid);
-        public Task<BackerDto> AddBacker2Project(int projectId, BackerDto dto);
+        public Task<ProjectDto> AddBacker2Project(int projectId, ProjectDto dto, int goalgained);
+        public Task<BackerDto> GetBackerByEmail(string email);
     }
 }
