@@ -2,9 +2,11 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-family: 'Times New Roman', Times, serif;
+    color: #033B4F;
 }
 
 /* Provide sufficient contrast against white background */
@@ -24,10 +26,27 @@ a {
   border-color: #1861ac;
 }
 
+.nav-link text-dark {
+    font-family: 'Times New Roman';
+    font-size: 50px;
+}
+
+.welcome {
+    color: #1D7486;
+    font-family: 'Times New Roman';
+    font-size: 65px;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /*hides the slide bar vertically-horizontally*/
+    overflow-y: hidden;
 }
 @media (min-width: 768px) {
   html {
@@ -59,19 +78,19 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 30px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 30px; /* Vertically center the text there */
 }
 
 .btncreator {
-    background-color: darkblue;
+    background-color: #1A6675;
     color: white;
     position: absolute;
     top: 15px;
@@ -84,7 +103,7 @@ body {
     position: absolute;
     top: 15px;
     right: 20px;
-    background-color: darkblue;
+    background-color: #1A6675;
     color: white;
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
     border-radius: 5px;
@@ -95,23 +114,329 @@ body {
 }
 
 .login {
-    background-color: darkblue;
+    background-color: #1F7A8C;
     color: white;
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
     border-radius: 5px;
 }
 
-.createcreator .createbacker {
-    background-color:aliceblue;
+.createcreator {
+    background-color: #F1F3F9 !important;
+}
+
+.createbacker {
+    background-color: #F1F3F9 !important;
+}
+
+.create {
+    background-color: #1F7A8C;
+    color: white;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
 }
 
 .signupbox {
     width: 300px;
     height: 360px;
-    border: 2px solid black;
+    border: 5px solid #022B3A;
     padding: 40px;
     position: absolute;
     left: 40%;
     bottom: 260px;
 }
 
+/*----------------------------bubbles css------------------------------*/
+.bubbles img {
+    width: 50px;
+    animation: bubble 7s linear infinite;
+    z-index:1;
+}
+
+.bubbles {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: -70px;
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-80vh);
+        opacity: 0;
+    }
+}
+
+.bubbles img:nth-child(1) {
+    animation-delay: 2s;
+}
+
+.bubbles img:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.bubbles img:nth-child(3) {
+    animation-delay: 3s;
+}
+
+.bubbles img:nth-child(4) {
+    animation-delay: 4.5s;
+}
+
+.bubbles img:nth-child(5) {
+    animation-delay: 3s;
+}
+
+.bubbles img:nth-child(6) {
+    animation-delay: 6s;
+}
+
+.bubbles img:nth-child(7) {
+    animation-delay: 7s;
+}
+
+.frontimage img {
+    position:absolute;
+    left:460px;
+    width:600px;
+    height:400px;
+    top: 200px;
+    z-index:0;
+}
+
+/*-----------------------backer menu----------------------*/
+
+.wrapper {
+    display: flex;
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+    .wrapper .sidebar {
+        width: 209px;
+        height: 100%;
+        background: #1D7486;
+        padding: 30px 0px;
+        position: fixed;
+    }
+
+        .wrapper .sidebar h2 {
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #bdb8d7;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            list-style-type:none;
+        }
+
+            .wrapper .sidebar ul li a {
+                color: #BFDBF7;
+                display: block;
+            }
+
+                .wrapper .sidebar ul li a .fas {
+                    width: 25px;
+                }
+
+            .wrapper .sidebar ul li:hover {
+                background-color: #47BFD7;
+            }
+
+                .wrapper .sidebar ul li:hover a {
+                    color: #fff;
+                }
+
+/*----------createproject-----------*/
+
+.btncrproject {
+    background-color: #1F7A8C;
+    color: white;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+.createproject {
+    position:absolute;
+    right: 30px;
+    top: 70px;
+}
+
+.projectform {
+    text-align: center;
+    color: #033B4F;
+    background-color: #F1F3F9;
+}
+
+.category {
+    width: 207px;
+    height: 29px;
+    text-align: center;
+    background-color: #BFDBF7;
+    border: 1px solid #1D7486;
+}
+
+/*---------------------------------search bar-------------------------------*/
+
+.searchwrapper {
+    width: 50%;
+    height: 50px;
+    background-size: cover;
+    position:absolute;
+    top:100px;
+    right:120px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search_box {
+    width: 50%;
+    position: relative;
+}
+
+    .search_box input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        padding-right: 60px;
+        box-sizing: border-box;
+        background: rgba(0,0,0,0.3);
+        border: 2px solid #fff;
+        border-radius: 10px;
+        font-size: 18px;
+        color: #fff;
+        outline: none;
+    }
+
+.fa-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 25px;
+    color: #fff;
+    font-size: 25px;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #fff;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff;
+}
+
+.projectbody {
+    background-color: #F1F3F9;
+}
+
+/*---------------------------------------dropdown select category box---------------------------*/
+
+
+
+.select-box-category {
+    position:absolute;
+    top: 100px;
+    right:200px;
+    width: 200px;
+    flex-direction: column;
+}
+
+    .select-box-category .options-container-category {
+        background: #033B4F;
+        color: #F1F3F9;
+        max-height: 0;
+        width: 100%;
+        opacity: 0;
+        transition: all 0.4s;
+        border-radius: 8px;
+        overflow: hidden;
+        order: 1;
+    }
+
+.selected {
+    background: #033B4F;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #F1F3F9;
+    position: relative;
+    order: 0;
+}
+
+    .selected::after {
+        content: "";
+        background: url("img/arrow-down.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        height: 100%;
+        width: 32px;
+        right: 10px;
+        top: 5px;
+        transition: all 0.4s;
+    }
+
+.select-box-category .options-container-category.active {
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+}
+
+    .select-box-category .options-container-category.active + .selected::after {
+        transform: rotateX(180deg);
+        top: -6px;
+    }
+
+.select-box-category .options-container-category::-webkit-scrollbar {
+    width: 8px;
+    background: #011D27;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box-category .options-container-category::-webkit-scrollbar-thumb {
+    background: #06759D;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box-category .option,
+.selected {
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+    .select-box-category .option:hover {
+        background: #06759D;
+    }
+
+.select-box-category label {
+    cursor: pointer;
+}
+
+.select-box-category .option .radio {
+    display: none;
+}
