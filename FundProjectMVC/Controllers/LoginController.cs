@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FundProjectsMVC.Controllers
 {
-    public class Login : Controller
+    public class LoginController : Controller
     {
         public IActionResult LoginCreator()
         {
@@ -23,6 +23,13 @@ namespace FundProjectsMVC.Controllers
             return View();
         }
         public IActionResult CreateBacker()
+        {
+            return View();
+        }
+
+
+        //Creates a backer
+        public IActionResult AddBacker()
         {
             return View();
         }

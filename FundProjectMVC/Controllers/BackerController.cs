@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace FundProjectMVC.Controllers
 {
-    public class Project : Controller
+    public class BackerController : Controller
     {
-        public IActionResult CreateProject()
+        public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Projects()
+        {
+            return View();
+        }
+
+        
     }
 }

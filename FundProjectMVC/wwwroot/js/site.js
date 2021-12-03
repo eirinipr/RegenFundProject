@@ -57,26 +57,26 @@ $(document).ready(function () {
     }
 });
 
-function getallProjects() {
-    let urlAPI = "https://localhost:44317/api/Project";
-    let method = 'GET';
+//function getallProjects() {
+//    let urlAPI = "https://localhost:44317/api/Project";
+//    let method = 'GET';
 
-    $.ajax({
-        url: urlAPI,
-        method: method
-        })
-        .done(result => {
-            let resultData = "<table class='table'>";
-            result.forEach(project => resultData += ('<tr><td>' + project.Id + '</td><td>' + project.Title + '</td></tr>'));
+//    $.ajax({
+//        url: urlAPI,
+//        method: method
+//        })
+//        .done(result => {
+//            let resultData = "<table class='table'>";
+//            result.forEach(project => resultData += ('<tr><td>' + project.Id + '</td><td>' + project.Title + '</td></tr>'));
 
-            resultData += '</table'>
-            $("#Results").html(resultData);
-        })
-        .fail(failure => {
-            alert("Something went wrong.");
-        });
+//            resultData += '</table'>
+//            $("#Results").html(resultData);
+//        })
+//        .fail(failure => {
+//            alert("Something went wrong.");
+//        });
 
-}
+//}
 
 
 function getCreator() {

@@ -1,4 +1,6 @@
-﻿<body class="projectbody">
+﻿@model IEnumerable<FundProjectAPI.DTOs.ProjectDto>
+
+<body class="projectbody">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <div class="wrapper">
@@ -108,10 +110,43 @@
             Select Category
         </div>
     </div>
-    
+
+
+
+    @*table for all projects           throws exception that it's not connected to database although it is'*@
+
+    <table class="tableprojects">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>image</th>
+                <th>Goal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td> <a href="/project/get/@project.Id"> @project.Title</a> </td>
+                    <td>   @project.Description  </td>
+                    <td>
+                        @if (project.Description != null)
+                        {
+                            <img src="/images/@project.Description" title="Product image" style="width:100px; height:100px;" />
+                        }
+                    </td>
+                    <td>   @project.Category  </td>
+                    <td>   @project.Goal  </td>
+                    <td> <a href="/product/delete/@project.Id" title="delete"><i class="fa fa-trash"></i></a> </td>
+                    <td> <a href="/product/update/@project.Id" title="update"><i class="fa fa-edit"></i></a> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
 
 
-    <div id="Results"></div>
 </body>
