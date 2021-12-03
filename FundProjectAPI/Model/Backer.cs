@@ -15,6 +15,6 @@ namespace FundProjectAPI.Model
         [Required]
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public List<BackerProject> BackerProjects { get; set; } 
+        public List<Project> Projects { get; set; } = new();
     }
 }

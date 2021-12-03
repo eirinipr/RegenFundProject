@@ -110,10 +110,19 @@ namespace FundProjectAPI.Controllers
         }
 
 
+        //Read all projects
         [HttpGet]
         public async Task<List<ProjectDto>> GetAllProjects()
         {
             return await _service.GetAllProjects();
+
+        
+        //Adds a project and connects it to a backerId
+        [HttpPost, Route("{backerId}")]
+        public async Task<ActionResult<ProjectDto>> AddProject2Backer(int backerId, ProjectDto dto)
+        {
+            return await _service.AddProject2Backer(backerId, dto);
+
         }
     }
 }

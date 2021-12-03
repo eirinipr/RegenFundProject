@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace FundProjectAPI.Controllers
+namespace FundProjects.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectCreatorController : ControllerBase
     {
         private readonly IProjectCreatorService _service;
+
 
         public ProjectCreatorController(IProjectCreatorService service)
         {
@@ -36,13 +37,13 @@ namespace FundProjectAPI.Controllers
             return Ok(result);
         }
 
-        //Update projectCreator rewardPackages
-        [HttpPatch, Route("{id}/rewards-packages")]
-        public async Task<ActionResult<ProjectCreatorDto>> UpfateProjectCreatorRewardPackages([FromRoute] int id, [FromBody] ProjectCreatorDto dto)
+        //Add project to project creator
+        [HttpPost, Route("{id}/project")]
+        public async Task<ActionResult<ProjectDto>> AddProjectToCreator([FromRoute] int id, [FromBody] ProjectDto dto)
         {
             try
             {
-                var response = await _service.Update(id, dto);
+                var response = await _service.AddProjectToProjectCreator(id, dto);
                 return Ok(response);
             }
             catch (AggregateException e)
@@ -55,6 +56,7 @@ namespace FundProjectAPI.Controllers
             }
             return StatusCode(500);
         }
+
 
         [HttpPut, Route("{id}")]
         public async Task<ActionResult<ProjectCreatorDto>> Put(int id, ProjectCreatorDto dto)

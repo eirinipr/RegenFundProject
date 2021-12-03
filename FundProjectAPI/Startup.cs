@@ -1,7 +1,10 @@
+using FundProjectAPI.Data;
+using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +35,12 @@ namespace FundProjectAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FundProjectAPI", Version = "v1" });
             });
+            services.AddDbContext<FundContext>(options => options
+            .EnableSensitiveDataLogging()
+            .UseSqlServer(Configuration.GetConnectionString("FundDB")));
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IProjectCreatorService, ProjectCreatorService>();
+            services.AddScoped<IBackerService, BackerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +51,7 @@ namespace FundProjectAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FundProjectAPI v1"));
+
             }
 
             app.UseHttpsRedirection();

@@ -27,7 +27,6 @@ namespace FundProjectAPI.Service
                 Title = dto.Title,
                 Description = dto.Description,
                 Category = dto.Category,
-                ProjectCreatorId = dto.ProjectCreatorId,
                 Goal = dto.Goal
             };
 
@@ -39,7 +38,6 @@ namespace FundProjectAPI.Service
                 Id = project.Id,
                 Title = project.Title,
                 Description = project.Description,
-                ProjectCreatorId = project.ProjectCreatorId,
                 Category = project.Category,
                 Goal = project.Goal
             };
@@ -64,7 +62,6 @@ namespace FundProjectAPI.Service
                     Id = p.Id,
                     Title = p.Title,
                     Description = p.Description,
-                    ProjectCreatorId = p.ProjectCreatorId,
                     Category = p.Category,
                     Goal = p.Goal
                 })
@@ -87,7 +84,6 @@ namespace FundProjectAPI.Service
                 Id = project.Id,
                 Title = project.Title,
                 Description = project.Description,
-                ProjectCreatorId = project.ProjectCreatorId,
                 Category = project.Category,
                 Goal = project.Goal
 
@@ -106,7 +102,6 @@ namespace FundProjectAPI.Service
             //If a property does not exist in the request body, it will be updated to null
             project.Title = dto.Title;
             project.Description = dto.Description;
-            project.ProjectCreatorId = dto.ProjectCreatorId;
             project.Category = dto.Category;
             project.Goal = dto.Goal;
 
@@ -117,7 +112,6 @@ namespace FundProjectAPI.Service
                 Id = project.Id,
                 Title = project.Title,
                 Description = project.Description,
-                ProjectCreatorId = project.ProjectCreatorId,
                 Category = project.Category,
                 Goal = project.Goal
 
@@ -126,7 +120,7 @@ namespace FundProjectAPI.Service
 
             public async Task<List<ProjectDto>> Search([FromQuery] string title, [FromQuery] ProjectCategory category)
         {
-            var results = _fundContext.Projects.Include(p => p.ProjectCreatorId).Select(p => p);
+            var results = _fundContext.Projects.Include(p => p.Id).Select(p => p);
 
             if (title != null)
             {
@@ -146,7 +140,6 @@ namespace FundProjectAPI.Service
                     Title = p.Title,
                     Description = p.Description,
                     Category = p.Category,
-                    ProjectCreatorId = p.ProjectCreatorId,
                     Goal= p.Goal,
                     GoalGained = p.GoalGained
                 });
@@ -175,10 +168,30 @@ namespace FundProjectAPI.Service
                 Title = project.Title,
                 Description = project.Description,
                 Category = project.Category,
-                ProjectCreatorId = project.ProjectCreatorId,
                 Goal = project.Goal,
                 GoalGained = project.GoalGained
             };
+        }
+        public async Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto)
+        {
+            if (dto is null)
+                throw new ArgumentException("Data format problem");
+            Backer backer = await _fundContext.Backers
+                .SingleOrDefaultAsync(b => b.Id == backerId);
+            if (backer is null)
+                throw new NotFoundException("The backer id is invalid, or backer has been removed");
+            if (dto.Title is null || dto.Description is null)
+                throw new ArgumentException("Project must have Title and description");
+
+            Project project = dto.Convert();
+
+            backer.Projects.Add(project);
+
+
+            await _fundContext.SaveChangesAsync();
+            return project.Convert();
+
+
         }
     }
 }
