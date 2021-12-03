@@ -1,0 +1,46 @@
+﻿<body class="projectform">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Creator</h2>
+            <ul>
+                <li><a href="Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+                <li><a href="../Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
+                <li><a href="#"><i class="fas fa-project-diagram"></i>My Projects</a></li>
+            </ul>
+        </div>
+    </div>
+    <h2 style="color: #033B4F;">Create a new project</h2>
+    <div>
+        <form>
+            <label>Title</label><br />
+            <input type="text" name="Title" /><br />
+            <label>Description</label><br />
+            <input type="text" name="Description" /><br />
+            <label>Category</label><br />
+            <select class="category">
+                <option value="Art">Art</option>
+                <option value="Comics">Comics</option>
+                <option value="Crafts">Crafts</option>
+                <option value="Dance">Dance</option>
+                <option value="Design">Design</option>
+                <option value="Fashion">Fashion</option>
+                <option value="FilmVideo">Film & Video</option>
+                <option value="Food">Food</option>
+                <option value="Games">Games</option>
+                <option value="Journalism">Journalism</option>
+                <option value="Music">Music</option>
+                <option value="Photography">Photography</option>
+                <option value="Publishing">Publishing</option>
+                <option value="Technology">Technology</option>
+                <option value="Theater">Theater</option>
+            </select><br />
+            <label>Creator Id</label><br />
+            <input type="text" name="CreatorId" /><br />
+            <label>Goal</label><br />
+            <input type="number" name="Goal" /><br />
+            <br /><input type="submit" class="create" value="Create Project" onclick="createProject()" />
+        </form>
+    </div>
+</body>

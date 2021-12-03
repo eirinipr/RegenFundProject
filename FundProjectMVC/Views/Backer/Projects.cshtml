@@ -1,0 +1,113 @@
+﻿<body class="projectbody">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Backer</h2>
+            <ul>
+                <li><a href="Index"><i class="fas fa-stream"></i>Dashboard</a></li>
+                <li><a href="Projects"><i class="fas fa-project-diagram"></i>Projects</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-alt"></i>Funded Projects</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <h3 style="text-align:left;">Projects</h3>
+    <div class="searchwrapper">
+        <div class="search_box">
+            <input type="text" placeholder="what are you looking for?">
+            <a style="cursor: pointer" **(click)="searchProjects()" **>
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="select-box-category">
+        <div class="options-container-category">
+            <div class="option">
+                <input type="radio"
+                       class="radio"
+                       id="art"
+                       name="category" />
+                <label for="art">Art</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Comics" name="category" />
+                <label for="Comics">Comics</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Crafts" name="category" />
+                <label for="Crafts">Crafts</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Dance" name="category" />
+                <label for="Dance">Dance</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Design" name="category" />
+                <label for="Design">Design</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Fashion" name="category" />
+                <label for="Fashion">Fashion</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="FilmVideo" name="category" />
+                <label for="sports">Film & Video</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Food" name="category" />
+                <label for="Food">Food</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Games" name="category" />
+                <label for="Games">Games</label>
+            </div>
+            <div class="option">
+                <input type="radio" class="radio" id="Journalism" name="category" />
+                <label for="Journalism">Journalism</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Music" name="category" />
+                <label for="Music">Music</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Photography" name="category" />
+                <label for="Photography">Photography</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Publishing" name="category" />
+                <label for="Publishing">Publishing</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Technology" name="category" />
+                <label for="Technology">Technology</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Theater" name="category" />
+                <label for="Theater">Theater</label>
+            </div>
+        </div>
+
+        <div class="selected">
+            Select Category
+        </div>
+    </div>
+
+    <div id="Results"></div>
+</body>

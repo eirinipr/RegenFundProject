@@ -12,5 +12,10 @@ namespace FundProjectMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult Projects()
+        {
+            return View();
+        }
     }
 }

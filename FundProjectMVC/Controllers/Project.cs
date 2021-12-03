@@ -8,7 +8,7 @@ namespace FundProjectMVC.Controllers
 {
     public class Project : Controller
     {
-        public IActionResult Projects()
+        public IActionResult CreateProject()
         {
             return View();
         }

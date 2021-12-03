@@ -29,10 +29,10 @@ function createBacker() {
 }
 
 function getBacker() {
-    let urlAPI = 'https://localhost:44317/api/Backer/{id}';
+    let urlAPI = 'https://localhost:44317/api/Backer/{email}';
     let method = 'GET';
     let data = JSON.stringify({
-        Id: $('Id').val()
+        Email: $('Email').val()
     });
 
     let contentType = 'application/json';
@@ -46,7 +46,7 @@ function getBacker() {
         .done(result => function (data) {
             window.location = 'Backer/Index.html';
             })
-        .fail(failure => alert("Id not found. Create an account below."));
+        .fail(failure => alert("Email not found. Create an account below."));
     
 }
 
@@ -80,10 +80,10 @@ function getallProjects() {
 
 
 function getCreator() {
-    let urlAPI = 'https://localhost:44317/api/ProjectCreator/{id}';
+    let urlAPI = 'https://localhost:44317/api/ProjectCreator/{email}';
     let method = 'GET';
     let data = JSON.stringify({
-        Id: $('Id').val()
+        Email: $('Email').val()
     });
 
     let contentType = 'application/json';
@@ -97,6 +97,27 @@ function getCreator() {
         .done(result => function (data) {
             window.location = 'Creator/Index.html';
         })
-        .fail(failure => alert("Id not found. Create an account below."));
+        .fail(failure => alert("Email not found. Create an account below."));
 
 }
+
+function searchProjects() {
+
+}
+
+/*dropdown category selector jsfunctions*/
+const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container-category");
+
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+    optionsContainer.classList.toggle("active");
+});
+
+optionsList.forEach(o => {
+    o.addEventListener("click", () => {
+        selected.innerHTML = o.querySelector("label").innerHTML;
+        optionsContainer.classList.remove("active");
+    });
+});
