@@ -12,7 +12,6 @@ namespace FundProjectAPI.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Backer> Backers { get; set; }
         public DbSet<ProjectCreator> ProjectCreators { get; set; }
-        public DbSet<BackerProject> BackerProjects { get; set; }
         public DbSet<RewardPackage> RewardPackage { get; set; }
         public FundContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
