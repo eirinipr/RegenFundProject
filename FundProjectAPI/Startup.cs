@@ -35,9 +35,7 @@ namespace FundProjectAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FundProjectAPI", Version = "v1" });
             });
-            services.AddDbContext<FundContext>(options => options
-            .EnableSensitiveDataLogging()
-            .UseSqlServer(Configuration.GetConnectionString("FundDB")));
+            services.AddDbContext<FundContext>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IProjectCreatorService, ProjectCreatorService>();
             services.AddScoped<IBackerService, BackerService>();

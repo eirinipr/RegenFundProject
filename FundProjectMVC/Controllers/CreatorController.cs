@@ -11,11 +11,11 @@ namespace FundProjectMVC.Controllers
 {
     public class CreatorController : Controller
     {
-        private readonly IProjectService projectService;
+        private readonly IProjectService _projectService;
 
         public CreatorController(IProjectService projectService)
         {
-            this.projectService = projectService;
+            this._projectService = projectService;
         }
         public IActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace FundProjectMVC.Controllers
 
         public async Task<IActionResult> Projects()
         {
-            Task<List<ProjectDto>> projects =  projectService.GetAllProjects();
+            Task<List<ProjectDto>> projects =  _projectService.GetAllProjects();
             return View(await projects);
         }
 
