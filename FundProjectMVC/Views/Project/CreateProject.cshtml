@@ -15,7 +15,7 @@
     </div>
     <h2 style="color: #033B4F;">Create a new project</h2>
     <div>
-        <form>
+        <form asp-action="CreateProject">
             <label>Title</label><br />
             <input type="text" name="Title" /><br />
             <label>Description</label><br />
@@ -26,7 +26,7 @@
             <input type="text" name="CreatorId" /><br />
             <label>Goal</label><br />
             <input type="number" name="Goal" /><br />
-            <br /><input type="submit" class="create" value="Create Project" onclick="createProject()" />
+            <br /><input type="submit" class="create" value="Create Project" />
         </form>
     </div>
 </body>

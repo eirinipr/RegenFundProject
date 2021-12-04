@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundProjectAPI.Migrations
 {
     [DbContext(typeof(FundContext))]
-    [Migration("20211202151222_startingpoint")]
-    partial class startingpoint
+    [Migration("20211204102410_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace FundProjectAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BackerProject", b =>
+                {
+                    b.Property<int>("BackersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BackersId", "ProjectsId");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.ToTable("BackerProject");
+                });
 
             modelBuilder.Entity("FundProjectAPI.Model.Backer", b =>
                 {
@@ -46,28 +61,6 @@ namespace FundProjectAPI.Migrations
                     b.ToTable("Backer");
                 });
 
-            modelBuilder.Entity("FundProjectAPI.Model.BackerProject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BackerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BackerId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("BackerProject");
-                });
-
             modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -87,7 +80,7 @@ namespace FundProjectAPI.Migrations
                     b.Property<decimal>("GoalGained")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProjectCreatorId")
+                    b.Property<int?>("ProjectCreatorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -117,34 +110,12 @@ namespace FundProjectAPI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ProjectCreator");
-                });
-
-            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreatorRewardPackage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ProjectCreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RewardPackageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectCreatorId");
-
-                    b.HasIndex("RewardPackageId");
-
-                    b.ToTable("ProjectCreatorRewardPackage");
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.RewardPackage", b =>
@@ -157,91 +128,69 @@ namespace FundProjectAPI.Migrations
                     b.Property<decimal>("FundAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProjectCreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Reward")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectCreatorId");
-
-                    b.HasIndex("ProjectId");
-
                     b.ToTable("RewardPackage");
                 });
 
-            modelBuilder.Entity("FundProjectAPI.Model.BackerProject", b =>
+            modelBuilder.Entity("ProjectRewardPackage", b =>
                 {
-                    b.HasOne("FundProjectAPI.Model.Backer", "Backer")
-                        .WithMany("BackerProjects")
-                        .HasForeignKey("BackerId");
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
 
-                    b.HasOne("FundProjectAPI.Model.Project", "Project")
-                        .WithMany("BackerProjects")
-                        .HasForeignKey("ProjectId");
+                    b.Property<int>("RewardPackagesId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Backer");
+                    b.HasKey("ProjectsId", "RewardPackagesId");
 
-                    b.Navigation("Project");
+                    b.HasIndex("RewardPackagesId");
+
+                    b.ToTable("ProjectRewardPackage");
+                });
+
+            modelBuilder.Entity("BackerProject", b =>
+                {
+                    b.HasOne("FundProjectAPI.Model.Backer", null)
+                        .WithMany()
+                        .HasForeignKey("BackersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FundProjectAPI.Model.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
                     b.HasOne("FundProjectAPI.Model.ProjectCreator", null)
                         .WithMany("Projects")
-                        .HasForeignKey("ProjectCreatorId")
+                        .HasForeignKey("ProjectCreatorId");
+                });
+
+            modelBuilder.Entity("ProjectRewardPackage", b =>
+                {
+                    b.HasOne("FundProjectAPI.Model.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("FundProjectAPI.Model.ProjectCreatorRewardPackage", b =>
-                {
-                    b.HasOne("FundProjectAPI.Model.ProjectCreator", "ProjectCreator")
+                    b.HasOne("FundProjectAPI.Model.RewardPackage", null)
                         .WithMany()
-                        .HasForeignKey("ProjectCreatorId");
-
-                    b.HasOne("FundProjectAPI.Model.RewardPackage", "RewardPackage")
-                        .WithMany()
-                        .HasForeignKey("RewardPackageId");
-
-                    b.Navigation("ProjectCreator");
-
-                    b.Navigation("RewardPackage");
-                });
-
-            modelBuilder.Entity("FundProjectAPI.Model.RewardPackage", b =>
-                {
-                    b.HasOne("FundProjectAPI.Model.ProjectCreator", null)
-                        .WithMany("RewardsPackages")
-                        .HasForeignKey("ProjectCreatorId");
-
-                    b.HasOne("FundProjectAPI.Model.Project", null)
-                        .WithMany("FundRewardPackages")
-                        .HasForeignKey("ProjectId");
-                });
-
-            modelBuilder.Entity("FundProjectAPI.Model.Backer", b =>
-                {
-                    b.Navigation("BackerProjects");
-                });
-
-            modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
-                {
-                    b.Navigation("BackerProjects");
-
-                    b.Navigation("FundRewardPackages");
+                        .HasForeignKey("RewardPackagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.ProjectCreator", b =>
                 {
                     b.Navigation("Projects");
-
-                    b.Navigation("RewardsPackages");
                 });
 #pragma warning restore 612, 618
         }

@@ -27,6 +27,8 @@ namespace FundProjectsMVC
         {
             services.AddDbContext<FundContext>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IProjectCreatorService, ProjectCreatorService>();
+            services.AddScoped<IBackerService, BackerService>();
             services.AddControllersWithViews();
 
         }

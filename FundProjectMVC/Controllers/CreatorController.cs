@@ -28,5 +28,13 @@ namespace FundProjectMVC.Controllers
             return View(await projects);
         }
 
+        public async Task<IActionResult> SearchProjects(string searchString)
+        {
+            Task<List<ProjectDto>> projects = _projectService.GetAllProjects();
+                //.Where(project => project.Title.Contains(searchString))
+                //.ToListAsync();
+            return View(await projects);
+        }
+
     }
 }

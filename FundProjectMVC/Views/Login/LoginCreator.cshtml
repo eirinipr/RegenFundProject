@@ -1,10 +1,11 @@
-﻿
+﻿@model FundProjectAPI.Model.ProjectCreator
+
 <div class="signin">
     <h2>Sign In</h2>
-        <form>
+        <form asp-action="GetCreator">
             <label>Enter your project creator email</label><br>
-            <input type="email" name="email" placeholder="Email"/> <br /> <br />
-            <input class="login" type="submit" value="Login" onclick="getCreator()" />
+            <input type="text" name="id" placeholder="Id"/> <br /> <br />
+            <input class="login" type="submit" value="Login" />
         </form> <br />
         <p>Not signed in? Create a new account <a href="CreateProjectCreator">here</a></p>
 </div>

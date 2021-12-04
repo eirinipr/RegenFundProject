@@ -1,15 +1,19 @@
-﻿<body class="createcreator">
+﻿
+
+<body class="createcreator">
 
     <h2 style="text-align:center;">Sign Up</h2>
     <div class="signupbox">
-        <form>
+        <form asp-action="CreateCreator">
             <label>First Name</label><br />
             <input type="text" name="First Name" />
             <label>Last Name</label><br />
             <input type="text" name="Last Name" />
             <label>Email</label><br />
             <input type="text" name="Email" /> <br />
-            <br /><input type="submit" class="create" value="Create Account" onclick="createCreator()" /> 
+            <label>Phone Number</label><br />
+            <input type="text" name="PhoneNumber" /> <br />
+            <br /><input type="submit" class="create" value="Create Account" />
         </form>
 
     </div>
