@@ -1,4 +1,6 @@
 ﻿@using FundProjectAPI.Model
+@using FundProjectMVC.Models
+@model ProjectWithImage 
 
 <body class="projectform">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -15,18 +17,30 @@
     </div>
     <h2 style="color: #033B4F;">Create a new project</h2>
     <div>
-        <form asp-action="CreateProject">
+        <form asp-action="CreateProject" enctype="multipart/form-data">
             <label>Title</label><br />
-            <input type="text" name="Title" /><br />
-            <label>Description</label><br />
-            <input type="text" name="Description" /><br />
+            <input asp-for="ProjectDto.Title" placeholder="Title" /><br />
+            <label><i>Description set as image path</i></label><br />
             <label>Category</label><br />
-            <select class="category"name="Category" asp-items="@(Html.GetEnumSelectList<ProjectCategory>())"></select> <br />
-            <label>Creator Id</label><br />
-            <input type="text" name="CreatorId" /><br />
+            <select asp-for="ProjectDto.Category" asp-items="@(Html.GetEnumSelectList<ProjectCategory>())" class="category"></select> <br />
+            <dl>
+                <dt>
+                    <label asp-for="ProjectImage"></label>
+                </dt>
+                <dd>
+                    <input asp-for="ProjectImage" type="file" class="category">
+                    <span asp-validation-for="ProjectImage"></span>
+                </dd>
+            </dl>
             <label>Goal</label><br />
-            <input type="number" name="Goal" /><br />
+            <input asp-for="ProjectDto.Goal" placeholder="Goal" /><br />
+            <br /><label><b>Create Reward Package</b></label><br />
+            <label>Price for package</label><br />
+            <input asp-for="RewardPackageDto.FundAmount" placeholder="Price" /><br />
+            <label>Reward after purchasing</label><br />
+            <input asp-for="RewardPackageDto.Reward" placeholder="Price" /><br />
             <br /><input type="submit" class="create" value="Create Project" />
         </form>
     </div>
 </body>
+

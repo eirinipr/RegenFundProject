@@ -1,4 +1,5 @@
-﻿using FundProjectAPI.DTOs;
+﻿using FundProjectAPI.Data;
+using FundProjectAPI.DTOs;
 using FundProjectAPI.Model;
 using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,13 @@ namespace FundProjectsMVC.Controllers
 
         private readonly IProjectCreatorService _projectcreatorService;
         private readonly IBackerService _backerService;
+        private readonly FundContext _context;
 
-        public LoginController(IProjectCreatorService projectcreatorService, IBackerService backerService)
+        public LoginController(IProjectCreatorService projectcreatorService, IBackerService backerService, FundContext context)
         {
            _projectcreatorService = projectcreatorService;
             _backerService = backerService;
+            _context = context;
         }
 
         public IActionResult LoginCreator()
@@ -35,10 +38,7 @@ namespace FundProjectsMVC.Controllers
                 {
                     return RedirectToAction("Index", "Creator");
                 }
-                else 
-                {
-                    return NotFound();
-                }
+                
             });
 
         }
@@ -52,10 +52,7 @@ namespace FundProjectsMVC.Controllers
                 {
                     return RedirectToAction("Index", "Backer");
                 }
-                else
-                {
-                    return NotFound();
-                }
+                
             });
 
         }
@@ -74,16 +71,32 @@ namespace FundProjectsMVC.Controllers
             return View();
         }
 
-        public IActionResult CreateCreator(ProjectCreatorDto dto) //den paizei akoma se petaei sth selida alla den ftiaxnei ton creator
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCreator([Bind("Id,FirstName,LastName,Email,PhoneNumber")] ProjectCreator projectCreator)
         {
-            _projectcreatorService.AddProjectCreator(dto);
-            return RedirectToAction("Index", "Creator");
+            if (ModelState.IsValid)
+            {
+                _context.Add(projectCreator);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Creator");
+            }
+            return View(projectCreator);
         }
 
-        public IActionResult AddBacker(BackerDto dto) //den paizei akoma se petaei sth selida alla den ftiaxnei ton backer
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddBacker([Bind("Id,FirstName,LastName,Email,PhoneNumber")] Backer backer)
         {
-            _backerService.AddBacker(dto);
-            return RedirectToAction("Index", "Backer");
+            if (ModelState.IsValid)
+            {
+                _context.Add(backer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Backer");
+            }
+            return View(backer);
         }
 
 

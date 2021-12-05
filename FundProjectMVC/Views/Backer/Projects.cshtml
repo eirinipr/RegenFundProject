@@ -18,10 +18,21 @@
     <h3 style="text-align:left;">Projects</h3>
     <div class="searchwrapper">
         <div class="search_box">
-            <input type="text" placeholder="what are you looking for?">
-            <a style="cursor: pointer" **(click)="searchProjects()" **>
-                <i class="fas fa-search"></i>
-            </a>
+            @*<input type="text" placeholder="what are you looking for?">
+                <a style="cursor: pointer" onclick="SearchProjects()" **>
+                    <i class="fas fa-search"></i>
+                </a>*@
+            @*<input type="text" placeholder="what are you looking for?">
+                <button type="submit" class="btnsearch" >
+                    <i class="fas fa-search"></i>
+                </button>*@
+
+            <form asp-action="SearchProjects">
+                <input type="text" placeholder="what are you looking for?">
+                <button type="submit" class="btnsearch">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -120,9 +131,11 @@
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Category</th>
                     <th>image</th>
+                    <th>Category</th>
                     <th>Goal</th>
+                    <th>Del</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>

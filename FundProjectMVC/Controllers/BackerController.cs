@@ -22,7 +22,7 @@ namespace FundProjectMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Projects()  //den moy thn emfanizei
+        public async Task<IActionResult> Projects() //den moy tin emfanizei
         {
             Task<List<ProjectDto>> projects = _projectService.GetAllProjects();
             return View(await projects);
