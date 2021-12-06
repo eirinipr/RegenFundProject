@@ -1,0 +1,30 @@
+﻿@using FundProjectAPI.Model
+@using FundProjectMVC.Models
+@model ProjectWithImage
+
+<h2 style="color: #033B4F;">Edit project</h2>
+<form asp-action="Edit" enctype="multipart/form-data">
+    <label>Title</label><br />
+    <input asp-for="Project.Title" placeholder="Title" /><br />
+    <label>Description</label><br />
+    <input asp-for="Project.Description" placeholder="Description" /><br />
+    <label>Category</label><br />
+    <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<ProjectCategory>())" class="category"></select> <br />
+    <dl>
+        <dt>
+            <label asp-for="ProjectImage"></label>
+        </dt>
+        <dd>
+            <input asp-for="ProjectImage" type="file" class="category">
+            <span asp-validation-for="ProjectImage"></span>
+        </dd>
+    </dl>
+    <label>Goal</label><br />
+    <input asp-for="Project.Goal" placeholder="Goal" /><br />
+    <br /><label><b>Create Reward Package</b></label><br />
+    <label>Price for package</label><br />
+    <input asp-for="RewardPackage.FundAmount" placeholder="Price" /><br />
+    <label>Reward after purchasing</label><br />
+    <input asp-for="RewardPackage.Reward" placeholder="Price" /><br />
+    <br /><input type="submit" class="create" value="Create Project" />
+</form>

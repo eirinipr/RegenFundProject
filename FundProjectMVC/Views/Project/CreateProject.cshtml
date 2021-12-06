@@ -9,38 +9,37 @@
         <div class="sidebar">
             <h2>Creator</h2>
             <ul>
-                <li><a href="Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+                <li><a href="../Creator/Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
                 <li><a href="../Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
                 <li><a href="#"><i class="fas fa-project-diagram"></i>My Projects</a></li>
             </ul>
         </div>
     </div>
     <h2 style="color: #033B4F;">Create a new project</h2>
-    <div>
-        <form asp-action="Create" enctype="multipart/form-data">
-            <label>Title</label><br />
-            <input asp-for="ProjectDto.Title" placeholder="Title" /><br />
-            <label><i>Description set as image path</i></label><br />
-            <label>Category</label><br />
-            <select asp-for="ProjectDto.Category" asp-items="@(Html.GetEnumSelectList<ProjectCategory>())" class="category"></select> <br />
-            <dl>
-                <dt>
-                    <label asp-for="ProjectImage"></label>
-                </dt>
-                <dd>
-                    <input asp-for="ProjectImage" type="file" class="category">
-                    <span asp-validation-for="ProjectImage"></span>
-                </dd>
-            </dl>
-            <label>Goal</label><br />
-            <input asp-for="ProjectDto.Goal" placeholder="Goal" /><br />
-            <br /><label><b>Create Reward Package</b></label><br />
-            <label>Price for package</label><br />
-            <input asp-for="RewardPackageDto.FundAmount" placeholder="Price" /><br />
-            <label>Reward after purchasing</label><br />
-            <input asp-for="RewardPackageDto.Reward" placeholder="Price" /><br />
-            <br /><input type="submit" class="create" value="Create Project" />
-        </form>
-    </div>
+    <form asp-action="Create" enctype="multipart/form-data">
+        <label>Title</label><br />
+        <input asp-for="Project.Title" placeholder="Title" /><br />
+        <label>Description</label><br />
+        <input asp-for="Project.Description" placeholder="Description" /><br />
+        <label>Category</label><br />
+        <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<ProjectCategory>())" class="category"></select> <br />
+        <dl>
+            <dt>
+                <label asp-for="ProjectImage"></label>
+            </dt>
+            <dd>
+                <input asp-for="ProjectImage" type="file" class="category">
+                <span asp-validation-for="ProjectImage"></span>
+            </dd>
+        </dl>
+        <label>Goal</label><br />
+        <input asp-for="Project.Goal" placeholder="Goal" /><br />
+        <br /><label><b>Create Reward Package</b></label><br />
+        <label>Price for package</label><br />
+        <input asp-for="RewardPackage.FundAmount" placeholder="Price" /><br />
+        <label>Reward after purchasing</label><br />
+        <input asp-for="RewardPackage.Reward" placeholder="Price" /><br />
+        <br /><input type="submit" class="create" value="Create Project" />
+    </form>
 </body>
 

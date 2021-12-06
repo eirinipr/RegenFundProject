@@ -41,7 +41,7 @@
                 @foreach (var project in Model)
                 {
                     <tr>
-                        <td> <a href="/project/get/@project.Id"> @project.Title</a> </td>
+                        <td> <a href="/Creator/Get/@project.Id"> @project.Title</a> </td>
                         <td>   @project.Description  </td>
                         <td>
                             @if (project.Description != null)
@@ -51,8 +51,8 @@
                         </td>
                         <td>   @project.Category  </td>
                         <td>   @project.Goal  </td>
-                        <td> <a href="/delete/@project.Id" title="delete"><i class="fa fa-trash"></i></a> </td>
-                        <td> <a href="/update/@project.Id" title="update"><i class="fa fa-edit"></i></a> </td>
+                        <td> <a href="/Creator/Delete/@project.Id" title="delete"><i class="fa fa-trash"></i></a> </td>
+                        <td> <a href="/Creator/Edit/@project.Id" title="edit"><i class="fa fa-edit"></i></a> </td>
                     </tr>
                 }
             </tbody>

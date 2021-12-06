@@ -1,0 +1,9 @@
+﻿@model FundProjectAPI.Model.Project
+
+<div class="areyousure">
+    <form method="post" asp-action="Delete">
+        <br /><br />
+        <label>Are you sure you want to delete project @Model.Title ?</label><br />
+        <input type="submit" value="Yes" style="background-color: #1F7A8C; color: white; box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); border-radius: 5px;" />
+    </form>
+</div>

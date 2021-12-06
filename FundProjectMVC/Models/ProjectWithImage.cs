@@ -1,4 +1,5 @@
 ﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace FundProjectMVC.Models
 {
     public class ProjectWithImage
     {
-        public ProjectDto ProjectDto { get; set; }
+        public Project Project { get; set; }
         public IFormFile ProjectImage { set; get; }
-        public RewardPackageDto RewardPackageDto { get; set; }
+        public RewardPackage RewardPackage { get; set; }
 
     }
 }
