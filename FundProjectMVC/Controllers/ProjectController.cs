@@ -45,7 +45,8 @@ namespace FundProjectMVC.Controllers
                 projectDto.Description = uniqueFileName;
             }
 
-            projectcreatorService.AddProjectToProjectCreator(projectcreatorId, projectDto);
+            int creatorId = int.Parse(Request.Cookies["name"]);
+            projectcreatorService.AddProjectToProjectCreator(creatorId, projectDto);
 
             return RedirectToAction("Index", "Creator");
         }

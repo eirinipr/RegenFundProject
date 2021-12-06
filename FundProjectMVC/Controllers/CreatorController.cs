@@ -46,7 +46,8 @@ namespace FundProjectMVC.Controllers
 
         public async Task<IActionResult> Profile(int id)
         {
-            Task<ProjectCreatorDto> creator = _projectcreatorService.GetProjectCreator(id);
+            int creatorId = int.Parse(Request.Cookies["name"]);
+            Task<ProjectCreatorDto> creator = _projectcreatorService.GetProjectCreator(creatorId);
             return View(await creator);
         }
 
