@@ -21,6 +21,14 @@ namespace FundProjectMVC.Controllers
         }
         public IActionResult Index()
         {
+            if (Request.Cookies["name"] != null)
+            {
+                ViewBag.message = Request.Cookies["name"];
+            }
+            else
+            {
+                ViewBag.message = "Not available";
+            }
             return View();
         }
 

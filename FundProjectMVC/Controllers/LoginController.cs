@@ -2,6 +2,7 @@
 using FundProjectAPI.DTOs;
 using FundProjectAPI.Model;
 using FundProjectAPI.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,32 +30,34 @@ namespace FundProjectsMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetCreator(int id)
+        public async Task<IActionResult> GetCreator(int id, IFormCollection fc)
         {
             Task<ProjectCreatorDto> projectCreator = _projectcreatorService.GetProjectCreator(id);
-            return await Task.Run<IActionResult>(() =>
+
+            if (projectCreator != null)
             {
-                if (true)
-                {
-                    return RedirectToAction("Index", "Creator");
-                }
-                
-            });
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddDays(2);
+                Response.Cookies.Append("name", fc["idcookie"], options);
+                return RedirectToAction("Index", "Creator");
+            }
+
+            return View(await projectCreator);
 
         }
 
-        public async Task<IActionResult> GetBacker(int id)
+        public async Task<IActionResult> GetBacker(int id, IFormCollection fc)
         {
             Task<BackerDto> backer = _backerService.GetBacker(id);
-            return await Task.Run<IActionResult>(() =>
+            if (backer != null)
             {
-                if (true)
-                {
-                    return RedirectToAction("Index", "Backer");
-                }
-                
-            });
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddDays(2);
+                Response.Cookies.Append("name", fc["idcookie"], options);
+                return RedirectToAction("Index", "Creator");
+            }
 
+            return View(await backer);
         }
 
         public IActionResult LoginBacker()

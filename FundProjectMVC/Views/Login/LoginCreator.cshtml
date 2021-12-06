@@ -2,9 +2,9 @@
 
 <div class="signin">
     <h2>Sign In</h2>
-        <form asp-action="GetCreator">
-            <label>Enter your project creator email</label><br>
-            <input type="text" name="id" placeholder="Id"/> <br /> <br />
+        <form method="POST" asp-action="GetCreator">
+            <label>Enter your project creator id</label><br>
+            <input type="text" name="idcookie" placeholder="Id"/> <br /> <br />
             <input class="login" type="submit" value="Login" />
         </form> <br />
         <p>Not signed in? Create a new account <a href="CreateProjectCreator">here</a></p>
