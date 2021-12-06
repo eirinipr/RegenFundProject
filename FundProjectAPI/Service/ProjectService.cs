@@ -68,6 +68,7 @@ namespace FundProjectAPI.Service
                 .ToListAsync();
         }
 
+
         public async Task<ProjectDto> GetProject(int id)
         {
             var project = await _fundContext.Projects
@@ -118,18 +119,18 @@ namespace FundProjectAPI.Service
             };
         }
 
-            public async Task<List<ProjectDto>> Search([FromQuery] string title, [FromQuery] ProjectCategory category)
-        {
-            var results = _fundContext.Projects.Include(p => p.Id).Select(p => p);
+            public async Task<List<ProjectDto>> Search([FromQuery] string title)
+            {
+            var results = _fundContext.Projects.Select(p => p);
 
             if (title != null)
             {
                 results = results.Where(b => b.Title.ToLower().Contains(title.ToLower()));
-            }
-
+            } 
+            
             var resultsList = await results.ToListAsync();
 
-            if (resultsList == null) return null;
+            //if (resultsList == null) return null;
 
             List<ProjectDto> projectDtos = new();
             foreach (var p in resultsList)
@@ -146,7 +147,7 @@ namespace FundProjectAPI.Service
             }
 
             return projectDtos;
-        }
+            }
 
         public async Task<ProjectDto> Update(int projectId, ProjectDto dto)
         {
@@ -192,6 +193,31 @@ namespace FundProjectAPI.Service
             return project.Convert();
 
 
+        }
+
+        public async Task<List<ProjectDto>> SelectCategory([FromQuery] ProjectCategory category)
+        {
+            var results = _fundContext.Projects.Select(p => p);
+                results = results.Where(b => b.Category.Equals(category));
+            
+            var resultsList = await results.ToListAsync();
+
+
+            List<ProjectDto> projectDtos = new();
+            foreach (var p in resultsList)
+            {
+                projectDtos.Add(new ProjectDto()
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Description = p.Description,
+                    Category = p.Category,
+                    Goal = p.Goal,
+                    GoalGained = p.GoalGained
+                });
+            }
+
+            return projectDtos;
         }
     }
 }

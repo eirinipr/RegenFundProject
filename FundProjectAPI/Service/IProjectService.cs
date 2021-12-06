@@ -13,10 +13,11 @@ namespace FundProjectAPI.Service
         public Task<ProjectDto> GetProject(int id);
         public Task<List<ProjectDto>> GetAllProjects();
         public Task<ProjectDto> AddProject(ProjectDto dto);
-        public Task<List<ProjectDto>> Search(string title, ProjectCategory category);
+        public Task<List<ProjectDto>> Search(string title);
         public Task<ProjectDto> Update(int projectId, ProjectDto dto);
         public Task<ProjectDto> Replace(int projectId, ProjectDto dto);
         public Task<bool> Delete(int projectId);
         public Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto);
+        public Task<List<ProjectDto>> SelectCategory(ProjectCategory category);
     }
 }

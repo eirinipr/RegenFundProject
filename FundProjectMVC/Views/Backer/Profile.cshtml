@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FundProjectAPI.DTOs.BackerDto>;
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Creator</h2>
+        <ul>
+            <li><a href="Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
+            <li><a href="Profile"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="#"><i class="fas fa-project-diagram"></i>My Projects</a></li>
+        </ul>
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </td>
+        @foreach (var item in Model)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+        }
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.LastName)
+        </td>
+        @foreach (var item in Model)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+        }
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Email)
+        </td>
+        @foreach (var item in Model)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        }
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+        @foreach (var item in Model)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        }
+    </tr>
+</table>

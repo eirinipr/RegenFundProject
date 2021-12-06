@@ -47,7 +47,7 @@ namespace FundProjectMVC.Controllers
 
             projectcreatorService.AddProjectToProjectCreator(projectcreatorId, projectDto);
 
-            return RedirectToAction("Creator", "Projects");
+            return RedirectToAction("Index", "Creator");
         }
 
         private string GetUniqueFileName(string fileName)

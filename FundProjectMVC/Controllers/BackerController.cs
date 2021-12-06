@@ -12,22 +12,29 @@ namespace FundProjectMVC.Controllers
     {
 
         private readonly IProjectService _projectService;
+        private readonly IBackerService _backerService;
 
-        public BackerController(IProjectService projectService)
+        public BackerController(IProjectService projectService, IBackerService backerService)
         {
             this._projectService = projectService;
+            this._backerService = backerService;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> Projects() //den moy tin emfanizei
+        public async Task<IActionResult> Projects(string searchString)
         {
-            Task<List<ProjectDto>> projects = _projectService.GetAllProjects();
+            Task<List<ProjectDto>> projects = _projectService.Search(searchString);
             return View(await projects);
         }
 
+        public async Task<IActionResult> Profile(int id)
+        {
+            Task<BackerDto> backer = _backerService.GetBacker(id);
+            return View(await backer);
+        }
 
     }
 }

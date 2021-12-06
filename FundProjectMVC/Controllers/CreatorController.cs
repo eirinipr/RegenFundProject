@@ -12,28 +12,34 @@ namespace FundProjectMVC.Controllers
     public class CreatorController : Controller
     {
         private readonly IProjectService _projectService;
+        private readonly IProjectCreatorService _projectcreatorService;
 
-        public CreatorController(IProjectService projectService)
+        public CreatorController(IProjectService projectService, IProjectCreatorService _projectcreatorService)
         {
             this._projectService = projectService;
+            this._projectcreatorService = _projectcreatorService;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> Projects()
+        public async Task<IActionResult> Projects(string searchString)
         {
-            Task<List<ProjectDto>> projects =  _projectService.GetAllProjects();
+            Task<List<ProjectDto>> projects = _projectService.Search(searchString);
             return View(await projects);
         }
 
-        public async Task<IActionResult> SearchProjects(string searchString)
+        //public async Task<IActionResult> SelectCategory(ProjectCategory category)
+        //{
+        //    Task<List<ProjectDto>> categorylist = _projectService.SelectCategory(category);
+        //    return View(await categorylist);
+        //}
+
+        public async Task<IActionResult> Profile(int id)
         {
-            Task<List<ProjectDto>> projects = _projectService.GetAllProjects();
-                //.Where(project => project.Title.Contains(searchString))
-                //.ToListAsync();
-            return View(await projects);
+            Task<ProjectCreatorDto> creator = _projectcreatorService.GetProjectCreator(id);
+            return View(await creator);
         }
 
     }

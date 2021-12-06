@@ -59,10 +59,8 @@ namespace FundProjectAPI.DTOs
             return new Project()
             {
                 Title = projectDto.Title,
-                Description = projectDto.Description,
                 Goal = projectDto.Goal,
                 Category = projectDto.Category,
-                GoalGained = projectDto.GoalGained
             };
         }
 

@@ -34,11 +34,20 @@ namespace FundProjectAPI.Controllers
 
 
 
-        //Search project by title or category
+        //Search project by title 
         [HttpGet, Route("Search")]
-        public ActionResult<List<ProjectDto>> Search(string title, ProjectCategory category)
+        public ActionResult<List<ProjectDto>> Search(string title)
         {
-            var response = _service.Search(title, category);
+            var response = _service.Search(title);
+            if (response.Result == null) return NotFound("Could not find a project that matches the specified criteria.");
+            return response.Result;
+        }
+
+        //Search project by category 
+        [HttpGet, Route("SelectCategory")]
+        public ActionResult<List<ProjectDto>> SelectCategory(ProjectCategory category)
+        {
+            var response = _service.SelectCategory(category);
             if (response.Result == null) return NotFound("Could not find a project that matches the specified criteria.");
             return response.Result;
         }
