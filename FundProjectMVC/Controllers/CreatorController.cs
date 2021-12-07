@@ -140,5 +140,24 @@ namespace FundProjectMVC.Controllers
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction("Projects", "Creator");
         //}
+
+        public IActionResult CreateReward()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRew([Bind("FundAmount,Reward")] RewardPackage rewardPackage)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(rewardPackage);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            //return View(rewardPackage);
+            return RedirectToAction("Projects", "Creator");
+        }
     }
 }
