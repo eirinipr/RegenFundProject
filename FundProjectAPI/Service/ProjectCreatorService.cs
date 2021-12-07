@@ -120,5 +120,12 @@ namespace FundProjectAPI.Service
 
             return dto;
         }
+
+
+        public async Task<ProjectCreatorDto> GetProjectCreatorByEmail(string email) {
+            var projectCreator = await _fundContext.ProjectCreators.SingleOrDefaultAsync(a => a.Email == email);
+            return projectCreator.Convert();
+        }
+
     }
 }

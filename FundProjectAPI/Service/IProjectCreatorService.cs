@@ -1,7 +1,5 @@
 ﻿using FundProjectAPI.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FundProjectAPI.Service
@@ -10,6 +8,7 @@ namespace FundProjectAPI.Service
     {
         public Task<ProjectCreatorDto> AddProjectCreator(ProjectCreatorDto dto);
         public Task<ProjectCreatorDto> GetProjectCreator(int id);
+        public Task<ProjectCreatorDto> GetProjectCreatorByEmail(string email);
         public Task<List<ProjectCreatorDto>> GetProjectCreators();
         public Task<ProjectCreatorDto> Update(int projectCreatorId, ProjectCreatorDto dto);
         public Task<ProjectCreatorDto> Replace(int projectCreatorId, ProjectCreatorDto dto);

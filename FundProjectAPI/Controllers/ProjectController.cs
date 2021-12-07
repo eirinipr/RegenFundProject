@@ -64,7 +64,7 @@ namespace FundProjectAPI.Controllers
         }
 
 
-        
+
         //Update project
         [HttpPatch, Route("{id}")]
         public async Task<ActionResult<ProjectDto>> Patch([FromRoute] int id, [FromBody] ProjectDto dto)
@@ -80,7 +80,7 @@ namespace FundProjectAPI.Controllers
                 foreach (var exception in e.InnerExceptions)
                 {
                     //if (exception is NotFoundException) //ask how to fix NotFoundException Error
-                        return BadRequest("Could not find the book. Ensure the book id is correct and try again.");
+                    return BadRequest("Could not find the book. Ensure the book id is correct and try again.");
                 }
             }
 

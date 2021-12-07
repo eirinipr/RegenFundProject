@@ -16,9 +16,9 @@ namespace FundProjectAPI.Data
         //public FundContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(" Server=localhost; Database=FundProjects; User=sa; Password=admin!@#123");
-
-           // builder.LogTo(Console.WriteLine);
+            //builder.UseSqlServer("Server=localhost;Database=master;Trusted_Connection=True;");
+           
+            // builder.LogTo(Console.WriteLine);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace FundProjectAPI.Data
             modelBuilder.Entity<Project>().ToTable("Project");
             modelBuilder.Entity<Backer>().ToTable("Backer");
             modelBuilder.Entity<ProjectCreator>().ToTable("ProjectCreator");
+            modelBuilder.Entity<ProjectCreator>()
+           .HasIndex(b => b.Email)
+           .IsUnique();
             modelBuilder.Entity<RewardPackage>().ToTable("RewardPackage");
         }
     }

@@ -30,19 +30,24 @@ namespace FundProjectsMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetCreator(int id, IFormCollection fc)
+        public async Task<IActionResult> GetCreator(string email)
         {
-            Task<ProjectCreatorDto> projectCreator = _projectcreatorService.GetProjectCreator(id);
+            ProjectCreatorDto projectCreator = await _projectcreatorService.GetProjectCreatorByEmail(email);
+            if (projectCreator is null) {
+                return RedirectToAction("LoginCreator", "Login");
+            }
 
             if (projectCreator != null)
             {
-                CookieOptions options = new CookieOptions();
-                options.Expires = DateTime.Now.AddDays(2);
-                Response.Cookies.Append("name", fc["idcookie"], options);
+                var options = new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddDays(2)
+                };
+                Response.Cookies.Append("name", projectCreator.Id.ToString(), options);
                 return RedirectToAction("Index", "Creator");
             }
 
-            return View(await projectCreator);
+            return View(projectCreator);
 
         }
 
