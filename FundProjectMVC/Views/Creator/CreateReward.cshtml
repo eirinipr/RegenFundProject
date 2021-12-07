@@ -1,0 +1,11 @@
+﻿@model MultipleModelsGet
+@using FundProjectMVC.Models
+
+<h2 style="color: #033B4F; text-align:center;">Create a new reward</h2>
+<form asp-action="CreateRew" style="position:absolute; right: 43.5%; top:150px; text-align:center;">
+    <label style="font-weight:bold;">Price for package</label><br />
+    <input asp-for="RewardPackageDto.FundAmount" placeholder="Price" /><br />
+    <label style="font-weight:bold;">Reward after purchasing</label><br />
+    <input asp-for="RewardPackageDto.Reward" placeholder="Price" /><br />
+    <br /><input type="submit" class="create" value="Create Reward Package" />
+</form>

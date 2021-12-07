@@ -1,0 +1,17 @@
+﻿@using FundProjectMVC.Models
+@model MultipleModelsGet
+
+ 
+
+
+<h1 style="text-align:center;"> Product @Model.ProjectDto.Title</h1>
+
+
+<table class="content-table" style="position:absolute; right:400px !important;">
+    <tr><td><b>Id</b></td> <td>@Model.ProjectDto.Id</td></tr>
+
+    <tr><td><b>Category</b></td>   <td>@Model.ProjectDto.Category</td></tr>
+    <tr><td><b>Goal</b></td>   <td>@Model.ProjectDto.Goal</td></tr>
+    <tr><td><b>GoalGained</b></td>   <td>@Model.ProjectDto.GoalGained</td></tr>
+
+</table>
