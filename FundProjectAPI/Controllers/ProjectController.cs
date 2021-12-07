@@ -128,10 +128,15 @@ namespace FundProjectAPI.Controllers
         
         //Adds a project and connects it to a backerId
         [HttpPost, Route("{backerId}")]
-        public async Task<ActionResult<ProjectDto>> AddProject2Backer(int backerId, ProjectDto dto)
+        public async Task<ActionResult<ProjectDto>> AddProject2Backer(int backerId, decimal fundamount, ProjectDto dto)
         {
-            return await _service.AddProject2Backer(backerId, dto);
+            return await _service.AddProject2Backer(backerId, fundamount, dto);
 
+        }
+        [HttpGet, Route("{backerId}")]
+        public async Task<List<ProjectDto>> FundedProjects(int backerId)
+        {
+            return await _service.FundedProjects(backerId);
         }
     }
 }

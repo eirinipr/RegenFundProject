@@ -17,7 +17,8 @@ namespace FundProjectAPI.Service
         public Task<ProjectDto> Update(int projectId, ProjectDto dto);
         public Task<ProjectDto> Replace(int projectId, ProjectDto dto);
         public Task<bool> Delete(int projectId);
-        public Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto);
+        public Task<ProjectDto> AddProject2Backer(int backerId, decimal fundamount, ProjectDto dto);
         public Task<List<ProjectDto>> SelectCategory(ProjectCategory category);
+        public Task<List<ProjectDto>> FundedProjects(int backerId);
     }
 }

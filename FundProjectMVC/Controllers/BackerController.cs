@@ -44,5 +44,13 @@ namespace FundProjectMVC.Controllers
             return View(await backer);
         }
 
+        public async Task<IActionResult> FundedProjects(int Id)
+        {
+            Task<List<ProjectDto>> projects  = _projectService.FundedProjects(Id);
+            return View(await projects);
+        }
+
+
+
     }
 }

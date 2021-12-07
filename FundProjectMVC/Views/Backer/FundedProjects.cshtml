@@ -1,0 +1,145 @@
+﻿@model IEnumerable<FundProjectAPI.DTOs.ProjectDto>;
+
+<body class="projectbody">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Backer</h2>
+            <ul>
+                <li><a href="Index"><i class="fas fa-stream"></i>Dashboard</a></li>
+                <li><a href="Projects"><i class="fas fa-project-diagram"></i>Projects</a></li>
+                <li><a href="Profile"><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="FundedProjects"><i class="fas fa-money-bill-alt"></i>Funded Projects</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 style="text-align:left;">Funded Projects</h3>
+   
+
+
+
+    @*table for all projects*@
+    <div style="position: absolute; top: 200px; right: 400px;">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>image</th>
+                    <th>Category</th>
+                    <th>Goal</th>
+                    <th>Funded</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+                {
+                    <tr>
+                        <td> <a href="/project/get/@project.Id"> @project.Title</a> </td>
+                        <td>   @project.Description  </td>
+                        <td>
+                            @if (project.Description != null)
+                            {
+                                <img src="/images/@project.Description" title="Product image" style="width:50px; height:50px;" />
+                            }
+                        </td>
+                        <td>   @project.Category  </td>
+                        <td>   @project.Goal  </td>
+                        <td> <a href="/delete/@project.Id" title="delete"><i class="fa fa-trash"></i></a> </td>
+                        <td> <a href="/update/@project.Id" title="update"><i class="fa fa-edit"></i></a> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="select-box-category">
+        <div class="options-container-category">
+            <div class="option">
+                <input type="radio"
+                       class="radio"
+                       id="art"
+                       name="category" />
+                <label for="Art">Art</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Comics" name="category" />
+                <label for="Comics">Comics</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Crafts" name="category" />
+                <label for="Crafts">Crafts</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Dance" name="category" />
+                <label for="Dance">Dance</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Design" name="category" />
+                <label for="Design">Design</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Fashion" name="category" />
+                <label for="Fashion">Fashion</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="FilmVideo" name="category" />
+                <label for="sports">Film & Video</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Food" name="category" />
+                <label for="Food">Food</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Games" name="category" />
+                <label for="Games">Games</label>
+            </div>
+            <div class="option">
+                <input type="radio" class="radio" id="Journalism" name="category" />
+                <label for="Journalism">Journalism</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Music" name="category" />
+                <label for="Music">Music</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Photography" name="category" />
+                <label for="Photography">Photography</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Publishing" name="category" />
+                <label for="Publishing">Publishing</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Technology" name="category" />
+                <label for="Technology">Technology</label>
+            </div>
+
+            <div class="option">
+                <input type="radio" class="radio" id="Theater" name="category" />
+                <label for="Theater">Theater</label>
+            </div>
+        </div>
+
+        <div class="selected">
+            Select Category
+        </div>
+    </div>
+
+
+</body>

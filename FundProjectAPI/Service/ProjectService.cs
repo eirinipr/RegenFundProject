@@ -173,7 +173,7 @@ namespace FundProjectAPI.Service
                 GoalGained = project.GoalGained
             };
         }
-        public async Task<ProjectDto> AddProject2Backer(int backerId, ProjectDto dto)
+        public async Task<ProjectDto> AddProject2Backer(int backerId, decimal fundamount, ProjectDto dto)
         {
             if (dto is null)
                 throw new ArgumentException("Data format problem");
@@ -185,7 +185,7 @@ namespace FundProjectAPI.Service
                 throw new ArgumentException("Project must have Title and description");
 
             Project project = dto.Convert();
-
+            project.GoalGained += fundamount;  
             backer.Projects.Add(project);
 
 
@@ -218,6 +218,12 @@ namespace FundProjectAPI.Service
             }
 
             return projectDtos;
+        }
+        public async Task<List<ProjectDto>> FundedProjects(int backerId) 
+        {            
+            Backer backer = await _fundContext.Backers.SingleOrDefaultAsync(b => b.Id == backerId);
+      
+            return backer.Projects.Select(p => p.Convert()).ToList();            
         }
     }
 }
