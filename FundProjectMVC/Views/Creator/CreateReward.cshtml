@@ -1,6 +1,18 @@
 ﻿@model MultipleModelsGet
 @using FundProjectMVC.Models
 
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Creator</h2>
+        <ul>
+            <li><a href="/Creator/Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
+            <li><a href="/Creator/Profile"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="/Creator/MyProjects"><i class="fas fa-project-diagram"></i>My Projects</a></li>
+        </ul>
+    </div>
+</div>
+
 <h2 style="color: #033B4F; text-align:center;">Create a new reward</h2>
 <form asp-action="CreateRew" style="position:absolute; right: 43.5%; top:150px; text-align:center;">
     <label style="font-weight:bold;">Price for package</label><br />

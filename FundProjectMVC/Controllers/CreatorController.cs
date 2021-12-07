@@ -48,7 +48,7 @@ namespace FundProjectMVC.Controllers
         //    return View(await categorylist);
         //}
 
-        public async Task<IActionResult> Profile(int id)
+        public async Task<IActionResult> Profile()
         {
             int creatorId = int.Parse(Request.Cookies["name"]);
             Task<ProjectCreatorDto> creator = _projectcreatorService.GetProjectCreator(creatorId);
@@ -158,6 +158,39 @@ namespace FundProjectMVC.Controllers
             }
             //return View(rewardPackage);
             return RedirectToAction("Projects", "Creator");
+        }
+
+
+
+        public async Task<IActionResult> DeleteCreator(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var projectCreator = await _context.ProjectCreators.FindAsync(id);
+            //var project = await _context.Projects
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            if (projectCreator == null)
+            {
+                return NotFound();
+            }
+            _context.ProjectCreators.Remove(projectCreator);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+            //return View(project);
+        }
+
+        public async Task<IActionResult> MyProjects()
+        {
+            int creatorId = int.Parse(Request.Cookies["name"]);
+            Task<List<ProjectDto>> projects = _projectService.CreatorProjects(creatorId);
+            return View(await projects);
+        }
+
+        public IActionResult Redirect()
+        {
+            return View();
         }
     }
 }

@@ -225,5 +225,12 @@ namespace FundProjectAPI.Service
       
             return backer.Projects.Select(p => p.Convert()).ToList();            
         }
+
+        public async Task<List<ProjectDto>> CreatorProjects(int creatorId)
+        {
+            ProjectCreator projectCreator = await _fundContext.ProjectCreators.SingleOrDefaultAsync(b => b.Id == creatorId);
+
+            return projectCreator.Projects.Select(p => p.Convert()).ToList();
+        }
     }
 }

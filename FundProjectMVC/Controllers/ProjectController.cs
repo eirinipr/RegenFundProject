@@ -70,14 +70,14 @@ namespace FundProjectMVC.Controllers
         //        return RedirectToAction("Index", "Creator");
         //    }
 
-        //    private string GetUniqueFileName(string fileName)
-        //    {
-        //        fileName = Path.GetFileName(fileName);
-        //        return Path.GetFileNameWithoutExtension(fileName)
-        //                  + "_"
-        //                  + Guid.NewGuid().ToString().Substring(0, 4)
-        //                  + Path.GetExtension(fileName);
-        //    }
+        //private string GetUniqueFileName(string fileName)
+        //{
+        //    fileName = Path.GetFileName(fileName);
+        //    return Path.GetFileNameWithoutExtension(fileName)
+        //              + "_"
+        //              + Guid.NewGuid().ToString().Substring(0, 4)
+        //              + Path.GetExtension(fileName);
+        //}
 
 
     }

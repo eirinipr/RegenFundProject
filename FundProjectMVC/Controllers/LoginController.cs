@@ -54,7 +54,7 @@ namespace FundProjectsMVC.Controllers
                 CookieOptions options = new CookieOptions();
                 options.Expires = DateTime.Now.AddDays(2);
                 Response.Cookies.Append("name", fc["idcookie"], options);
-                return RedirectToAction("Index", "Creator");
+                return RedirectToAction("Index", "Backer");
             }
 
             return View(await backer);
@@ -83,7 +83,7 @@ namespace FundProjectsMVC.Controllers
             {
                 _context.Add(projectCreator);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Creator");
+                return RedirectToAction("Redirect", "Creator");
             }
             return View(projectCreator);
         }
@@ -97,11 +97,12 @@ namespace FundProjectsMVC.Controllers
             {
                 _context.Add(backer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Backer");
+                return RedirectToAction("Redirect", "Creator");
             }
             return View(backer);
         }
 
+        
 
     }
 }
