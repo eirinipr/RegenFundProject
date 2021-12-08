@@ -118,7 +118,7 @@ namespace FundProjectsMVC.Controllers
             {
                 _context.Add(backer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Redirect", "Creator");
+                return RedirectToAction("LoginBacker", "Login");
             }
             return View(backer);
         }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace FundProjectAPI.Migrations
 {
     public partial class initial : Migration
@@ -74,7 +72,8 @@ namespace FundProjectAPI.Migrations
                         name: "FK_Project_ProjectCreator_ProjectCreatorId",
                         column: x => x.ProjectCreatorId,
                         principalTable: "ProjectCreator",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
