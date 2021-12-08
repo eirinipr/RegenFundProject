@@ -117,6 +117,7 @@ namespace FundProjectMVC.Controllers
             return View(project.Convert());
         }
 
+
         [HttpPost]
         public async Task<IActionResult> AddFund(decimal goalGained, Project project)
         {
@@ -128,11 +129,43 @@ namespace FundProjectMVC.Controllers
             //BackerDto backer = await _backerService.GetBacker(backerId);
             await projectService.AddProject2Backer(backerId, goalGained, project.Convert());
             //var project = await projectService.GetProject(project.Id);
-          
-
-
-            return RedirectToAction("Index", "Backer");
+          return RedirectToAction("Index", "Backer");
         }
+
+        //    [HttpPost]
+        //    public IActionResult Create(int projectcreatorId, ProjectWithImage projectWithImage)
+        //    {
+        //        ProjectDto projectDto = projectWithImage.ProjectDto;
+        //        var img = projectWithImage.ProjectImage;
+        //        if (img != null)
+        //        {
+        //            var uniqueFileName = GetUniqueFileName(img.FileName);
+        //            var uploads = Path.Combine(hostEnvironment.ContentRootPath + "\\wwwroot", "image");
+        //            var filePath = Path.Combine(uploads, uniqueFileName);
+        //            img.CopyTo(new FileStream(filePath, FileMode.Create));
+
+        //            projectDto.Description = uniqueFileName;
+        //        }
+
+        //        int creatorId = int.Parse(Request.Cookies["name"]);
+        //        projectcreatorService.AddProjectToProjectCreator(creatorId, projectDto);
+
+        //        return RedirectToAction("Index", "Creator");
+        //    }
+
+        //private string GetUniqueFileName(string fileName)
+        //{
+        //    fileName = Path.GetFileName(fileName);
+        //    return Path.GetFileNameWithoutExtension(fileName)
+        //              + "_"
+        //              + Guid.NewGuid().ToString().Substring(0, 4)
+        //              + Path.GetExtension(fileName);
+        //}
+
+
+
+            
+       
 
     }
 }

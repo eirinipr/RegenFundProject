@@ -66,6 +66,7 @@ namespace FundProjectsMVC.Controllers
                     Expires = DateTime.Now.AddDays(2)
                 };
                 Response.Cookies.Append("name", backer.Id.ToString(), options);
+  
                 return RedirectToAction("Index", "Backer");
             }
 
@@ -94,6 +95,7 @@ namespace FundProjectsMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 try
                 {
                     await _projectcreatorService.AddProjectCreator(projectCreator.Convert());
@@ -102,6 +104,7 @@ namespace FundProjectsMVC.Controllers
                 {
                    return RedirectToAction("CreateProjectCreator", "Login");
                 }
+
             }
             return RedirectToAction("LoginCreator", "Login");
         }
@@ -115,11 +118,12 @@ namespace FundProjectsMVC.Controllers
             {
                 _context.Add(backer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Backer");
+                return RedirectToAction("Redirect", "Creator");
             }
             return View(backer);
         }
 
+        
 
     }
 }

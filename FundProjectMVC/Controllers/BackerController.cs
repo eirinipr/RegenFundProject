@@ -1,5 +1,6 @@
 ﻿using FundProjectAPI.DTOs;
 using FundProjectAPI.Model;
+
 using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,11 +15,13 @@ namespace FundProjectMVC.Controllers
 
         private readonly IProjectService _projectService;
         private readonly IBackerService _backerService;
+        private readonly FundContext _context;
 
-        public BackerController(IProjectService projectService, IBackerService backerService)
+        public BackerController(IProjectService projectService, IBackerService backerService, FundContext context)
         {
             this._projectService = projectService;
             this._backerService = backerService;
+            this._context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -42,19 +45,38 @@ namespace FundProjectMVC.Controllers
             return View(await projects);
         }
 
-        public async Task<IActionResult> Profile(int id)
+        public async Task<IActionResult> Profile()
         {
-            Task<BackerDto> backer = _backerService.GetBacker(id);
+            int backerId = int.Parse(Request.Cookies["name"]);
+            Task<BackerDto> backer = _backerService.GetBacker(backerId);
             return View(await backer);
         }
 
-        public async Task<IActionResult> FundedProjects(int Id)
+        public async Task<IActionResult> FundedProjects()
         {
-            Task<List<ProjectDto>> projects  = _projectService.FundedProjects(Id);
+            int backerId = int.Parse(Request.Cookies["name"]);
+            Task<List<ProjectDto>> projects  = _projectService.FundedProjects(backerId);
             return View(await projects);
         }
 
-
+        public async Task<IActionResult> DeleteBacker(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var backer = await _context.Backers.FindAsync(id);
+            //var project = await _context.Projects
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            if (backer == null)
+            {
+                return NotFound();
+            }
+            _context.Backers.Remove(backer);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+            //return View(project);
+        }
 
     }
 }

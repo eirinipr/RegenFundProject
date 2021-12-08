@@ -20,5 +20,6 @@ namespace FundProjectAPI.Service
         public Task<ProjectDto> AddProject2Backer(int backerId, decimal fundamount, ProjectDto dto);
         public Task<List<ProjectDto>> SelectCategory(ProjectCategory category);
         public Task<List<ProjectDto>> FundedProjects(int backerId);
+        public Task<List<ProjectDto>> CreatorProjects(int creatorId);
     }
 }
