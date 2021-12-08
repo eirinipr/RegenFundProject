@@ -30,34 +30,48 @@ namespace FundProjectsMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetCreator(int id, IFormCollection fc)
+        public async Task<IActionResult> GetCreator(string email)
         {
-            Task<ProjectCreatorDto> projectCreator = _projectcreatorService.GetProjectCreator(id);
+            ProjectCreatorDto projectCreator = await _projectcreatorService.GetProjectCreatorByEmail(email);
+            if (projectCreator is null) {
+                return RedirectToAction("LoginCreator", "Login");
+            }
 
             if (projectCreator != null)
             {
-                CookieOptions options = new CookieOptions();
-                options.Expires = DateTime.Now.AddDays(2);
-                Response.Cookies.Append("name", fc["idcookie"], options);
+                var options = new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddDays(2)
+                };
+                Response.Cookies.Append("name", projectCreator.Id.ToString(), options);
                 return RedirectToAction("Index", "Creator");
             }
 
-            return View(await projectCreator);
+            return View(projectCreator);
 
         }
 
-        public async Task<IActionResult> GetBacker(int id, IFormCollection fc)
+        public async Task<IActionResult> GetBacker(string email)
         {
-            Task<BackerDto> backer = _backerService.GetBacker(id);
+            BackerDto backer = await _backerService.GetBackerByEmail(email);
+            if (backer is null)
+            {
+                return RedirectToAction("LoginBacker", "Login");
+            }
+
             if (backer != null)
             {
-                CookieOptions options = new CookieOptions();
-                options.Expires = DateTime.Now.AddDays(2);
-                Response.Cookies.Append("name", fc["idcookie"], options);
+                var options = new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddDays(2)
+                };
+                Response.Cookies.Append("name", backer.Id.ToString(), options);
+  
                 return RedirectToAction("Index", "Backer");
             }
 
-            return View(await backer);
+            return View(backer);
+
         }
 
         public IActionResult LoginBacker()
@@ -81,11 +95,18 @@ namespace FundProjectsMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projectCreator);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Redirect", "Creator");
+
+                try
+                {
+                    await _projectcreatorService.AddProjectCreator(projectCreator.Convert());
+                }
+                catch (Exception ex)
+                {
+                   return RedirectToAction("CreateProjectCreator", "Login");
+                }
+
             }
-            return View(projectCreator);
+            return RedirectToAction("LoginCreator", "Login");
         }
 
 

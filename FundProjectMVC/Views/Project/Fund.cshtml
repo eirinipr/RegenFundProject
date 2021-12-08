@@ -1,0 +1,49 @@
+﻿@model FundProjectAPI.Model.Project
+
+@{
+    ViewData["Title"] = "Fund";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Fund</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddFund">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Title" />
+            <input type="hidden" asp-for="Description" />
+            <input type="hidden" asp-for="Goal" />
+
+            <div class="form-group">
+                <label asp-for="GoalGained" class="control-label"></label>
+                <input asp-for="GoalGained" class="form-control" />
+                <span asp-validation-for="GoalGained" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+
+@*<div class="fund">
+    <h2>Fund</h2>
+        <form method="POST" asp-action="AddFund">
+            <label>Enter your fund</label><br>
+            <input type="number" name="goalGained" placeholder="goalGained"/> <br /> <br />
+            <input class="save" type="submit" value="save"/>
+        </form> <br />
+</div>*@

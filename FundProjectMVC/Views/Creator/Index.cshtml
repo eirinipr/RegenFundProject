@@ -1,19 +1,87 @@
-﻿
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+@model IEnumerable<FundProjectAPI.DTOs.ProjectDto>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+        <body>
+
+            @{
+    ViewData["Title"] = "Index";
+                @*Layout = "~/Views/Shared/_LayoutAdmin.cshtml";*@
+            }
 <div class="creatorid" style="top:50px;right:0">
     <div class="creatoruser" style="position: absolute; top: 80px; left:220px; width: 150px; border: 3px solid #1D7486; text-align:center;">Welcome Creator @ViewBag.message</div>
 </div>
-<div class="wrapper">
-    <div class="sidebar">
-        <h2>Creator</h2>
-        <ul>
-            <li><a href="/Creator/Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
-            <li><a href="/Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
-            <li><a href="/Creator/Profile"><i class="fas fa-user"></i>Profile</a></li>
-            <li><a href="/Creator/MyProjects"><i class="fas fa-project-diagram"></i>My Projects</a></li>
-        </ul>
-    </div>
-</div>
-<div class="createproject">
-    <button class="btncrproject" value="Create New Project" onclick="window.location = '../Project/CreateProject'">Create New Project</button>
-</div>
+            <div class="wrapper">
+                <div class="sidebar">
+                    <h2>Creator</h2>
+                    <ul>
+                        <li><a href="Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+                        <li><a href="/Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
+                        <li><a href="/Creator/Profile"><i class="fas fa-user"></i>Profile</a></li>
+                        <li><a href="#"><i class="fas fa-project-diagram"></i>My Projects</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-left:13%">
+                <h2>Projects for </h2>
+            </div>
+
+            <table class="table" style="margin-left:13%">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Goal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GoalGained)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Goal)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.GoalGained)*@
+                            <progress value=@item.GoalGained max=@item.Goal />
+                        </td>
+                        <td>
+                            <a href="/Project/Edit/@item.Id" title="edit"><i class="fa fa-edit"></i></a>
+                            <a href="/Project/Delete/@item.Id" title="delete"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="createproject">
+                <button class="btncrproject" value="Create New Project" onclick="window.location = '../Project/CreateProject'">Create New Project</button>
+            </div>
+
+        </body>
+
+

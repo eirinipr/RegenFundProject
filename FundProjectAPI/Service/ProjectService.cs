@@ -57,14 +57,7 @@ namespace FundProjectAPI.Service
         {
 
             return await _fundContext.Projects
-                .Select(p => new ProjectDto()
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Description = p.Description,
-                    Category = p.Category,
-                    Goal = p.Goal
-                })
+                .Select(p => p.Convert())
                 .ToListAsync();
         }
 

@@ -4,7 +4,7 @@ using FundProjectAPI.Model;
 using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,17 +23,15 @@ namespace FundProjectMVC.Controllers
             this._projectcreatorService = projectcreatorService;
             this._context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            if (Request.Cookies["name"] != null)
-            {
-                ViewBag.message = Request.Cookies["name"];
-            }
-            else
-            {
-                ViewBag.message = "Not available";
-            }
-            return View();
+            int creatorId = int.Parse(Request.Cookies["name"]);
+            ProjectCreatorDto  projectCreator = await _projectcreatorService.GetProjectCreator(creatorId);
+           // projectCreator.Convert().Projects.ToList();
+            List<ProjectDto> allProjects = await _projectService.GetAllProjects();
+            List<ProjectDto>  projects= allProjects.Where(p => p.ProjectCreatorId == projectCreator.Id)
+                .ToList();
+            return View(projects);
         }
 
         public async Task<IActionResult> Projects(string searchString)
@@ -42,13 +40,9 @@ namespace FundProjectMVC.Controllers
             return View(await projects);
         }
 
-        //public async Task<IActionResult> SelectCategory(ProjectCategory category)
-        //{
-        //    Task<List<ProjectDto>> categorylist = _projectService.SelectCategory(category);
-        //    return View(await categorylist);
-        //}
 
         public async Task<IActionResult> Profile()
+
         {
             int creatorId = int.Parse(Request.Cookies["name"]);
             Task<ProjectCreatorDto> creator = _projectcreatorService.GetProjectCreator(creatorId);
@@ -129,17 +123,6 @@ namespace FundProjectMVC.Controllers
             return RedirectToAction("Projects", "Creator");
             //return View(project);
         }
-
-        ////POST
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var project = await _context.Projects.FindAsync(id);
-        //    _context.Projects.Remove(project);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction("Projects", "Creator");
-        //}
 
         public IActionResult CreateReward()
         {
