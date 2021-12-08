@@ -86,11 +86,16 @@ namespace FundProjectsMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projectCreator);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Creator");
+                try
+                {
+                    await _projectcreatorService.AddProjectCreator(projectCreator.Convert());
+                }
+                catch (Exception ex)
+                {
+                   return RedirectToAction("CreateProjectCreator", "Login");
+                }
             }
-            return View(projectCreator);
+            return RedirectToAction("LoginCreator", "Login");
         }
 
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace FundProjectAPI.Migrations
 {
     public partial class initial : Migration
@@ -30,7 +32,7 @@ namespace FundProjectAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -72,8 +74,7 @@ namespace FundProjectAPI.Migrations
                         name: "FK_Project_ProjectCreator_ProjectCreatorId",
                         column: x => x.ProjectCreatorId,
                         principalTable: "ProjectCreator",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -133,6 +134,12 @@ namespace FundProjectAPI.Migrations
                 name: "IX_Project_ProjectCreatorId",
                 table: "Project",
                 column: "ProjectCreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectCreator_Email",
+                table: "ProjectCreator",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectRewardPackage_RewardPackagesId",

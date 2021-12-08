@@ -1,4 +1,5 @@
 ﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@ namespace FundProjectAPI.Service
         public Task<ProjectCreatorDto> Replace(int projectCreatorId, ProjectCreatorDto dto);
         public Task<bool> Delete(int projectCreatorId);
         public Task<ProjectDto> AddProjectToProjectCreator(int projectCreatorId, ProjectDto dto);
+        public Task<List<ProjectDto>> GetProjectCreatorProjects(int creatorId);
+
 
     }
 }

@@ -17,8 +17,8 @@ namespace FundProjectAPI.Data
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             //builder.UseSqlServer("Server=localhost;Database=master;Trusted_Connection=True;");
-           
-            // builder.LogTo(Console.WriteLine);
+
+            //builder.LogTo(Console.WriteLine);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

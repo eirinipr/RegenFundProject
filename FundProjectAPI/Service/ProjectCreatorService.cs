@@ -29,10 +29,14 @@ namespace FundProjectAPI.Service
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber
             };
+            var creator = await GetProjectCreatorByEmail(dto.Email);
+            if (creator is not null){
+                throw new Exception("There is already a user with this email.");
+            }
+
             _fundContext.ProjectCreators.Add(projectCreator);
 
             await _fundContext.SaveChangesAsync();
-
             return projectCreator.Convert();
         }
 
@@ -110,9 +114,13 @@ namespace FundProjectAPI.Service
                 throw new ArgumentException("Project creator must have first name,last name and email.");
 
             Project project = dto.Convert();
-            foreach (var rewardPackageDto in dto.RewardPackageDtos)
+            if (dto.RewardPackageDtos is not null)
             {
-                project.RewardPackages.Add(rewardPackageDto.Convert());
+                dto.RewardPackageDtos.ForEach(dto => project.RewardPackages.Add(dto.Convert()));
+                //foreach (var rewardPackageDto in dto.RewardPackageDtos)
+                //{
+                //    project.RewardPackages.Add(rewardPackageDto.Convert());
+                //}
             }
             projectCreator.Projects.Add(project);
 
@@ -127,5 +135,11 @@ namespace FundProjectAPI.Service
             return projectCreator.Convert();
         }
 
-    }
+        public async Task<List<ProjectDto>> GetProjectCreatorProjects(int creatorId)
+        {
+            var projectCreator = await _fundContext.ProjectCreators.SingleOrDefaultAsync(c => c.Id == creatorId);
+            return projectCreator.Projects.Select(c=>c.Convert()).ToList();
+        }
+
+        }
 }

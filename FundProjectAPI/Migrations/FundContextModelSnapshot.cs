@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace FundProjectAPI.Migrations
 {
     [DbContext(typeof(FundContext))]
@@ -15,9 +17,10 @@ namespace FundProjectAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("BackerProject", b =>
                 {
@@ -38,8 +41,9 @@ namespace FundProjectAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -56,15 +60,16 @@ namespace FundProjectAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Backer");
+                    b.ToTable("Backer", (string)null);
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Category")
                         .HasColumnType("int");
@@ -88,19 +93,20 @@ namespace FundProjectAPI.Migrations
 
                     b.HasIndex("ProjectCreatorId");
 
-                    b.ToTable("Project");
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.ProjectCreator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -113,15 +119,19 @@ namespace FundProjectAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectCreator");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("ProjectCreator", (string)null);
                 });
 
             modelBuilder.Entity("FundProjectAPI.Model.RewardPackage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<decimal>("FundAmount")
                         .HasColumnType("decimal(18,2)");
@@ -131,7 +141,7 @@ namespace FundProjectAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RewardPackage");
+                    b.ToTable("RewardPackage", (string)null);
                 });
 
             modelBuilder.Entity("ProjectRewardPackage", b =>
@@ -166,9 +176,11 @@ namespace FundProjectAPI.Migrations
 
             modelBuilder.Entity("FundProjectAPI.Model.Project", b =>
                 {
-                    b.HasOne("FundProjectAPI.Model.ProjectCreator", null)
+                    b.HasOne("FundProjectAPI.Model.ProjectCreator", "ProjectCreator")
                         .WithMany("Projects")
                         .HasForeignKey("ProjectCreatorId");
+
+                    b.Navigation("ProjectCreator");
                 });
 
             modelBuilder.Entity("ProjectRewardPackage", b =>

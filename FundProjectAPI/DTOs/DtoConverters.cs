@@ -19,7 +19,8 @@ namespace FundProjectAPI.DTOs
                 FirstName = projectCreator.FirstName,
                 LastName = projectCreator.LastName,
                 Email = projectCreator.Email,
-                PhoneNumber = projectCreator.PhoneNumber
+                PhoneNumber = projectCreator.PhoneNumber,
+                Projects = projectCreator.Projects
             };
         }
 
@@ -48,7 +49,8 @@ namespace FundProjectAPI.DTOs
                 Description = project.Description,
                 Goal = project.Goal,
                 Category = project.Category,
-                GoalGained = project.GoalGained
+                GoalGained = project.GoalGained,
+                ProjectCreatorId =  (project.ProjectCreator != null) ? project.ProjectCreator.Id : 0
             };
         }
 
@@ -59,6 +61,7 @@ namespace FundProjectAPI.DTOs
             return new Project()
             {
                 Title = projectDto.Title,
+                Description = projectDto.Description,
                 Goal = projectDto.Goal,
                 Category = projectDto.Category,
             };

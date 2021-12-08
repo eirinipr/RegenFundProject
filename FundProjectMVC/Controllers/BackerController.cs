@@ -32,9 +32,9 @@ namespace FundProjectMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Projects(string searchString)
+        public async Task<IActionResult> Projects()
         {
-            Task<List<ProjectDto>> projects = _projectService.Search(searchString);
+            Task<List<ProjectDto>> projects = _projectService.GetAllProjects();
             return View(await projects);
         }
 
