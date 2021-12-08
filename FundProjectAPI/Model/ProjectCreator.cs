@@ -16,6 +16,6 @@ namespace FundProjectAPI.Model
         [Required]
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public virtual List<Project> Projects { get; set; } = new();
+        public List<Project> Projects { get; set; } = new();
     }
 }

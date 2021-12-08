@@ -1,4 +1,5 @@
 ﻿using FundProjectAPI.DTOs;
+using FundProjectAPI.Model;
 using FundProjectAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,18 +20,21 @@ namespace FundProjectMVC.Controllers
             this._projectService = projectService;
             this._backerService = backerService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            if (Request.Cookies["name"] != null)
-            {
-                ViewBag.message = Request.Cookies["name"];
-            }
-            else
-            {
-                ViewBag.message = "Not available";
-            }
-            return View();
+            int backerId = int.Parse(Request.Cookies["name"]);
+
+
+            BackerDto backerDto = await _backerService.GetBacker(backerId);
+            Backer backer =backerDto.Convert();
+            List<ProjectDto>  projects = backer.Projects.Select(p=>p.Convert()).ToList();
+
+            //List<ProjectDto> allProjects = await _projectService.GetAllProjects();
+            //List<ProjectDto> projects = allProjects.Where(p => p. == backerDto.Id)
+            //    .ToList();
+            return View(projects);
         }
+
 
         public async Task<IActionResult> Projects()
         {

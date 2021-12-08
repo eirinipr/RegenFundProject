@@ -54,7 +54,7 @@ namespace FundProjectAPI.Service
 
         public async Task<BackerDto> GetBacker(int id)
         {
-            var backer = await _fundContext.Backers.SingleOrDefaultAsync(a => a.Id == id);
+            var backer = await _fundContext.Backers.Include(b=>b.Projects).SingleOrDefaultAsync(a => a.Id == id);
             return backer.Convert();
         }
 
@@ -132,6 +132,12 @@ namespace FundProjectAPI.Service
 
 
         }
+
+        public async Task<BackerDto> GetBackerByEmail(string email) {
+            var backer = await _fundContext.Backers.SingleOrDefaultAsync(a => a.Email == email);
+            return backer.Convert();
+        }
+
 
     }
 }

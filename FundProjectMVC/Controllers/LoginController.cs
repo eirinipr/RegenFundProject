@@ -51,18 +51,26 @@ namespace FundProjectsMVC.Controllers
 
         }
 
-        public async Task<IActionResult> GetBacker(int id, IFormCollection fc)
+        public async Task<IActionResult> GetBacker(string email)
         {
-            Task<BackerDto> backer = _backerService.GetBacker(id);
-            if (backer != null)
+            BackerDto backer = await _backerService.GetBackerByEmail(email);
+            if (backer is null)
             {
-                CookieOptions options = new CookieOptions();
-                options.Expires = DateTime.Now.AddDays(2);
-                Response.Cookies.Append("name", fc["idcookie"], options);
-                return RedirectToAction("Index", "Creator");
+                return RedirectToAction("LoginBacker", "Login");
             }
 
-            return View(await backer);
+            if (backer != null)
+            {
+                var options = new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddDays(2)
+                };
+                Response.Cookies.Append("name", backer.Id.ToString(), options);
+                return RedirectToAction("Index", "Backer");
+            }
+
+            return View(backer);
+
         }
 
         public IActionResult LoginBacker()

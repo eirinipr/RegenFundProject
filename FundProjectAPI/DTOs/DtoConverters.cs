@@ -60,6 +60,7 @@ namespace FundProjectAPI.DTOs
 
             return new Project()
             {
+                Id = projectDto.Id,
                 Title = projectDto.Title,
                 Description = projectDto.Description,
                 Goal = projectDto.Goal,
@@ -86,7 +87,10 @@ namespace FundProjectAPI.DTOs
             {
                 Id = backer.Id,
                 FirstName = backer.FirstName,
-                LastName = backer.LastName
+                LastName = backer.LastName,
+                Email = backer.Email,
+                Projects = backer.Projects
+
             };
         }
 
@@ -96,7 +100,9 @@ namespace FundProjectAPI.DTOs
             {
                 Id = dto.Id,
                 FirstName = dto.FirstName,
-                LastName = dto.LastName
+                LastName = dto.LastName,
+                Email = dto.Email,
+                Projects = dto.Projects
             };
         }
 

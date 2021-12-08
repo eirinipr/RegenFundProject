@@ -27,6 +27,7 @@ namespace FundProjectMVC.Controllers
         {
             int creatorId = int.Parse(Request.Cookies["name"]);
             ProjectCreatorDto  projectCreator = await _projectcreatorService.GetProjectCreator(creatorId);
+           // projectCreator.Convert().Projects.ToList();
             List<ProjectDto> allProjects = await _projectService.GetAllProjects();
             List<ProjectDto>  projects= allProjects.Where(p => p.ProjectCreatorId == projectCreator.Id)
                 .ToList();
@@ -38,12 +39,6 @@ namespace FundProjectMVC.Controllers
             Task<List<ProjectDto>> projects = _projectService.Search(searchString);
             return View(await projects);
         }
-
-        //public async Task<IActionResult> SelectCategory(ProjectCategory category)
-        //{
-        //    Task<List<ProjectDto>> categorylist = _projectService.SelectCategory(category);
-        //    return View(await categorylist);
-        //}
 
         public async Task<IActionResult> Profile(int id)
         {
@@ -126,17 +121,6 @@ namespace FundProjectMVC.Controllers
             return RedirectToAction("Projects", "Creator");
             //return View(project);
         }
-
-        ////POST
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var project = await _context.Projects.FindAsync(id);
-        //    _context.Projects.Remove(project);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction("Projects", "Creator");
-        //}
 
         public IActionResult CreateReward()
         {

@@ -1,8 +1,17 @@
-﻿
+﻿@model IEnumerable<FundProjectAPI.DTOs.ProjectDto>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <div class="backerid" style="top:50px;right:0">
     <div class="creatoruser" style="position: absolute; top: 80px; left:220px; width: 150px; border: 3px solid #1D7486; text-align:center;">Welcome Backer @ViewBag.message</div>
 </div>
+
+
+<body>
+                @{
+    ViewData["Title"] = "Index";
+                @*Layout = "~/Views/Shared/_LayoutAdmin.cshtml";*@
+            }
+
 <div class="wrapper">
     <div class="sidebar">
         <h2>Backer</h2>
@@ -14,3 +23,55 @@
         </ul>
     </div>
 </div>
+
+                <div style="margin-left:13%">
+                <h2>Projects for </h2>
+            </div>
+
+            <table class="table" style="margin-left:13%">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Goal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GoalGained)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Goal)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.GoalGained)*@
+                            <progress value=@item.GoalGained max=@item.Goal />
+                        </td>
+                    </tr>
+}
+                </tbody>
+            </table>
+
+        </body>

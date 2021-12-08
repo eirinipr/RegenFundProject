@@ -19,12 +19,16 @@ namespace FundProjectMVC.Controllers
         private readonly IProjectService projectService;
         private readonly IProjectCreatorService projectcreatorService;
         private readonly IHostEnvironment hostEnvironment;
+        private readonly IBackerService _backerService;
 
-        public ProjectController(IProjectService projectService, IProjectCreatorService projectcreatorService, IHostEnvironment hostEnvironment, FundContext context)
+
+        public ProjectController(IProjectService projectService, IProjectCreatorService projectcreatorService, IHostEnvironment hostEnvironment, IBackerService backerService)
         {
             this.projectService = projectService;
             this.projectcreatorService = projectcreatorService;
             this.hostEnvironment = hostEnvironment;
+            this._backerService = backerService;
+
         }
 
         public IActionResult CreateProject()
@@ -101,6 +105,33 @@ namespace FundProjectMVC.Controllers
                 await projectService.Delete(id);
             }
             return RedirectToAction("Index", "Creator");
+        }
+
+        public async Task<IActionResult> Fund(int id)
+        {
+            var project = await projectService.GetProject(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            return View(project.Convert());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFund(decimal goalGained, Project project)
+        {
+            if (project == null)
+            {
+                return NotFound();
+            }
+            int backerId = int.Parse(Request.Cookies["name"]);
+            //BackerDto backer = await _backerService.GetBacker(backerId);
+            await projectService.AddProject2Backer(backerId, goalGained, project.Convert());
+            //var project = await projectService.GetProject(project.Id);
+          
+
+
+            return RedirectToAction("Index", "Backer");
         }
 
     }
