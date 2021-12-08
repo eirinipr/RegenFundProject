@@ -16,7 +16,7 @@
                 <div class="sidebar">
                     <h2>Creator</h2>
                     <ul>
-                        <li><a href="Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+                        <li><a href="/Creator/Index"><i class="fas fa-qrcode"></i>Dashboard</a></li>
                         <li><a href="/Creator/Projects"><i class="fas fa-stream"></i>All Projects</a></li>
                         <li><a href="/Creator/Profile"><i class="fas fa-user"></i>Profile</a></li>
                     </ul>
@@ -27,7 +27,7 @@
                 <h2>Creator Projects </h2>
             </div>
 
-            <table class="table" style="margin-left:13%; position:absolute; top:200px; right:270px; width:60%;">
+            <table class="content-table" style="margin-left:13%; position:absolute; top:150px; right:270px; width:60%;" >
 
                 <thead>
                     <tr>
@@ -46,7 +46,8 @@
                         <th>
                             @Html.DisplayNameFor(model => model.GoalGained)
                         </th>
-                        <th></th>
+                        <th>Del</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,9 +69,9 @@
                             @*@Html.DisplayFor(modelItem => item.GoalGained)*@
                             <progress value=@item.GoalGained max=@item.Goal />
                         </td>
+                        <td><a href="/Project/Delete/@item.Id" title="delete"><i class="fa fa-trash"></i></a></td>
                         <td>
                             <a href="/Project/Edit/@item.Id" title="edit"><i class="fa fa-edit"></i></a>
-                            <a href="/Project/Delete/@item.Id" title="delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     }

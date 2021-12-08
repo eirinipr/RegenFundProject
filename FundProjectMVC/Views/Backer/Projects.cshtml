@@ -14,12 +14,12 @@
         </div>
     </div>
 
-    <h3 style="text-align:left;">Projects</h3>
+    <h3 style="text-align:center; position:absolute; top:60px;right:720px;">Projects</h3>
     @using (Html.BeginForm("Projects", "Backer", FormMethod.Get))
     {
 
-        @Html.TextBox("searchString", null, htmlAttributes: new { style = " width: 20%; position: absolute;right:700px; top:100px; padding: 10px;padding - right: 60px;box - sizing: border - box;background: rgba(0, 0, 0, 0.3);border: 2px solid #fff;border - radius: 10px;font - size: 18px;color: #fff;outline: none; " })
-        <input type="submit" class="fa" value="" style="height:40px; width:40px; position: absolute; top: 105px; right: 650px; background-color: #1F7A8C; color: white; box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); border-radius: 5px;">
+        @Html.TextBox("searchString", null, htmlAttributes: new { style = " width: 20%; position: absolute; right:650px; top:120px; padding: 10px;padding - right: 60px;box - sizing: border - box;background: rgba(0, 0, 0, 0.3);border: 2px solid #fff;border - radius: 10px;font - size: 18px;color: #fff;outline: none; " })
+        <input type="submit" class="fa" value="" style="height: 40px; width: 40px; position: absolute; top: 125px; right: 600px; background-color: #1F7A8C; color: white; box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); border-radius: 5px;">
     }
 
 
@@ -34,6 +34,7 @@
                     <th>image</th>
                     <th>Category</th>
                     <th>Goal</th>
+                    <th>Fund</th>
                 </tr>
             </thead>
             <tbody>
